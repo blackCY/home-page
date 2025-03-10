@@ -1,0 +1,196 @@
+/* 自定义样式补充Tailwind CSS */
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 卡片悬停效果 */
+.card-hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* 渐变文字动画 */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient-text {
+  background-size: 200% auto;
+  animation: gradient-shift 5s ease infinite;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7d2fe;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #818cf8;
+}
+
+/* 图片悬停效果 */
+.image-zoom {
+  overflow: hidden;
+}
+
+.image-zoom img {
+  transition: transform 0.5s ease;
+}
+
+.image-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* 导航栏下划线动画 */
+.nav-underline {
+  position: relative;
+}
+
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #4f46e5;
+  transition: width 0.3s ease;
+}
+
+.nav-underline:hover::after {
+  width: 100%;
+}
+
+/* 导航新增悬停效果 */
+.nav-hover-effect {
+  position: relative;
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+.nav-hover-effect::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 50%;
+  background-color: #4f46e5;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-hover-effect:hover {
+  color: #4f46e5;
+}
+
+.nav-hover-effect:hover::after {
+  width: 100%;
+}
+
+/* 导航栏下拉菜单动画 */
+.dropdown-menu {
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu a {
+  position: relative;
+  overflow: hidden;
+}
+
+.dropdown-menu a::before {
+  content: '';
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #4f46e5;
+  transition: left 0.3s ease;
+}
+
+.dropdown-menu a:hover::before {
+  left: 0;
+}
+
+/* 代码块样式 */
+pre {
+  font-family: 'JetBrains Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow: auto;
+  line-height: 1.45;
+}
+
+/* 移动菜单动画 */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-down {
+  animation: slideDown 0.3s ease forwards;
+}
+
+/* 移动版下拉菜单动画 */
+#mobile-works-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+#mobile-works-menu:not(.hidden) {
+  max-height: 500px;
+}
+
+/* 移动端下拉菜单边框动画 */
+.mobile-dropdown .border-l-2 {
+  position: relative;
+}
+
+.mobile-dropdown .border-l-2::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 2px;
+  height: 0;
+  background-color: #6366f1;
+  transition: height 0.4s ease;
+}
+
+.mobile-dropdown .border-l-2:not(.hidden)::before {
+  height: 100%;
+}

@@ -207,6 +207,24 @@ pre {
   z-index: 1;
 }
 
+/* 卡片高度落差效果 */
+.parallax-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem 3rem; /* 减小行间距为3.5rem，列间距保持为3rem */
+  margin-top: 3rem;
+  position: relative;
+  z-index: 5;
+  padding: 2rem 0; /* 添加上下内边距 */
+}
+
+@media (max-width: 768px) {
+  .parallax-cards {
+    grid-template-columns: 1fr;
+    gap: 4rem; /* 在移动端增大间距 */
+  }
+}
+
 .parallax-element {
   position: absolute;
   border-radius: 50%;
@@ -281,10 +299,84 @@ pre {
   perspective: 1000px;
 }
 
-.parallax-cards {
+/* 卡片高度落差和视差效果 */
+.parallax-card {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+  perspective: 1000px;
   position: relative;
-  z-index: 5;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  overflow: hidden;
 }
+
+/* 卡片悬停效果 */
+.parallax-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  z-index: 20;
+}
+
+/* 偶数卡片上移 - 降低落差 */
+.parallax-card:nth-child(even) {
+  margin-top: -3rem; /* 降低落差 */
+  transform: rotate(-1deg); /* 添加微妙旋转 */
+}
+
+/* 奇数卡片下移 - 降低落差 */
+.parallax-card:nth-child(odd) {
+  margin-top: 3rem; /* 降低落差 */
+  transform: rotate(1deg); /* 添加微妙旋转 */
+}
+
+/* 第一个卡片特殊处理 - 降低高度 */
+.parallax-card:first-child {
+  margin-top: -1rem; /* 降低高度，但不要太低 */
+  transform: rotate(1deg);
+}
+
+/* 第二个卡片特殊处理 */
+.parallax-card:nth-child(2) {
+  margin-top: 4rem; /* 降低落差 */
+  transform: rotate(-1deg);
+}
+
+/* 第三个卡片特殊处理 */
+.parallax-card:nth-child(3) {
+  margin-top: 0.5rem; /* 进一步降低高度 */
+  transform: rotate(1.5deg);
+}
+
+/* 第四个卡片特殊处理 */
+.parallax-card:nth-child(4) {
+  margin-top: 2rem; /* 减小与第三个卡片的距离 */
+  transform: rotate(-1.5deg);
+}
+
+/* 响应式调整 - 保留部分落差效果 */
+@media (max-width: 768px) {
+  .parallax-card:nth-child(n) {
+    margin-top: 0;
+    margin-bottom: 3rem;
+    transform: none;
+  }
+  
+  /* 在移动端保留部分错落效果 */
+  .parallax-card:nth-child(even) {
+    transform: translateX(1rem) rotate(-1deg);
+  }
+  
+  .parallax-card:nth-child(odd) {
+    transform: translateX(-1rem) rotate(1deg);
+  }
+  
+  /* 悬停效果 */
+  .parallax-card:hover {
+    transform: translateY(-5px) scale(1.02);
+  }
+}
+
+/* 卡片容器样式已移动到上面的定义中 */
 
 .parallax-cards > div {
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;

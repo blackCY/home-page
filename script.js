@@ -173,15 +173,16 @@ function initParallaxEffect() {
     
     // 添加特效按钮
     const toggleEffectsButton = document.createElement('button');
-    toggleEffectsButton.textContent = '视差效果: 开';
-    toggleEffectsButton.className = 'fixed bottom-4 right-4 bg-indigo-600 text-white px-4 py-2 rounded-full shadow-lg z-50 hover:bg-indigo-700 transition-colors';
+    toggleEffectsButton.innerHTML = '<span class="mr-2">视差效果</span><span class="inline-block px-2 py-1 bg-white text-indigo-600 rounded-full text-xs font-bold">开</span>';
+    toggleEffectsButton.className = 'fixed bottom-24 right-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-xl z-50 hover:shadow-2xl transition-all duration-300 flex items-center justify-center border border-indigo-300 backdrop-blur-sm';
+    toggleEffectsButton.style.transform = 'translateY(-20px)';
     document.body.appendChild(toggleEffectsButton);
     
     let effectsEnabled = true;
     toggleEffectsButton.addEventListener('click', () => {
         effectsEnabled = !effectsEnabled;
-        toggleEffectsButton.textContent = `视差效果: ${effectsEnabled ? '开' : '关'}`;
-        toggleEffectsButton.className = `fixed bottom-4 right-4 ${effectsEnabled ? 'bg-indigo-600' : 'bg-gray-500'} text-white px-4 py-2 rounded-full shadow-lg z-50 hover:${effectsEnabled ? 'bg-indigo-700' : 'bg-gray-600'} transition-colors`;
+        toggleEffectsButton.innerHTML = `<span class="mr-2">视差效果</span><span class="inline-block px-2 py-1 ${effectsEnabled ? 'bg-white text-indigo-600' : 'bg-gray-200 text-gray-700'} rounded-full text-xs font-bold">${effectsEnabled ? '开' : '关'}</span>`;
+        toggleEffectsButton.className = `fixed bottom-24 right-4 ${effectsEnabled ? 'bg-gradient-to-r from-indigo-600 to-purple-600' : 'bg-gradient-to-r from-gray-500 to-gray-600'} text-white px-4 py-2 rounded-full shadow-xl z-50 hover:shadow-2xl transition-all duration-300 flex items-center justify-center border ${effectsEnabled ? 'border-indigo-300' : 'border-gray-400'} backdrop-blur-sm`;
         
         // 触发效果重置
         if (effectsEnabled) {

@@ -146,11 +146,20 @@
         </div>
     </section>
 
-    <section id="projects" class="py-16 px-4 bg-white">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">我的世界</h2>
+    <section id="projects" class="py-16 px-4 bg-white relative overflow-hidden">
+        <!-- 视差背景元素 -->
+        <div class="parallax-elements">
+            <div class="parallax-element element-1"></div>
+            <div class="parallax-element element-2"></div>
+            <div class="parallax-element element-3"></div>
+            <div class="parallax-element element-4"></div>
+            <div class="parallax-element element-5"></div>
+        </div>
+        
+        <div class="container mx-auto relative z-10">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 parallax-title">我的世界</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 parallax-cards">
                 <!-- 卡片 1 -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col md:flex-row">
                     <div class="md:w-1/2 p-6 flex flex-col justify-between">

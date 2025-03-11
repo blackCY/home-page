@@ -9,21 +9,21 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen font-sans">
-    <header class="sticky top-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
+    <header class="sticky top-0 bg-white/90 backdrop-blur-md shadow-lg z-50 transition-all duration-300" id="main-header">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-indigo-500 shadow-md">
+            <div class="flex items-center gap-3 logo-container">
+                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-indigo-500 shadow-md hover:shadow-indigo-200 transition-all duration-500 logo-animation">
                     <img src="https://i.pravatar.cc/150?img=32" alt="头像" class="w-full h-full object-cover">
                 </div>
-                <h1 class="text-xl font-bold text-gray-800 hidden sm:block">我的世界</h1>
+                <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 hidden sm:block transition-all duration-300 hover:scale-105">我的世界</h1>
             </div>
             
             <nav class="hidden md:block relative">
-                <ul class="flex space-x-6">
+                <ul class="flex space-x-8">
                     <li class="relative group">
-                        <a href="#" class="text-gray-700 hover:text-indigo-600 transition-colors flex items-center gap-1 nav-with-dropdown">
-                            <span>我的作品</span>
-                            <i class="fas fa-chevron-down text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                        <a href="#" class="text-gray-700 hover:text-indigo-600 transition-all duration-300 flex items-center gap-1 nav-with-dropdown font-medium">
+                            <span class="nav-hover-effect">我的作品</span>
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300 group-hover:rotate-180 opacity-70"></i>
                         </a>
                         <!-- 弹出菜单 -->
                         <div class="dropdown-menu absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden opacity-0 invisible transform -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 origin-top">
@@ -42,30 +42,36 @@
                         </div>
                     </li>
                     <li>
-                        <a href="#projects" class="text-gray-700 hover:text-indigo-600 transition-colors nav-hover-effect">技能分享</a>
+                        <a href="#projects" class="text-gray-700 hover:text-indigo-600 transition-all duration-300 font-medium">
+                            <span class="nav-hover-effect">技能分享</span>
+                        </a>
                     </li>
                     <li>
-                        <a href="#lifestyle" class="text-gray-700 hover:text-indigo-600 transition-colors nav-hover-effect">生活记录</a>
+                        <a href="#lifestyle" class="text-gray-700 hover:text-indigo-600 transition-all duration-300 font-medium">
+                            <span class="nav-hover-effect">生活记录</span>
+                        </a>
                     </li>
                     <li>
-                        <a href="#contact" class="text-gray-700 hover:text-indigo-600 transition-colors nav-hover-effect">联系咨询</a>
+                        <a href="#contact" class="text-gray-700 hover:text-indigo-600 transition-all duration-300 font-medium">
+                            <span class="nav-hover-effect">联系咨询</span>
+                        </a>
                     </li>
                 </ul>
             </nav>
             
             <div class="flex items-center space-x-4">
-                <div class="hidden sm:flex space-x-3">
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition-colors">
+                <div class="hidden sm:flex space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition-all duration-300 transform hover:-translate-y-1 social-icon">
                         <i class="fab fa-github text-lg"></i>
                     </a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition-colors">
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition-all duration-300 transform hover:-translate-y-1 social-icon">
                         <i class="fab fa-weixin text-lg"></i>
                     </a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition-colors">
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition-all duration-300 transform hover:-translate-y-1 social-icon">
                         <i class="far fa-envelope text-lg"></i>
                     </a>
                 </div>
-                <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                <button class="md:hidden text-gray-700 transition-all duration-300 transform hover:-translate-y-1 hover:text-indigo-600 social-icon" id="mobile-menu-button">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>

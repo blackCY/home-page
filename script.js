@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化视差效果
     initParallaxEffect();
     
+    // 导航栏滚动效果
+    initHeaderScrollEffect();
+    
     // 移动端菜单开关
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -146,6 +149,68 @@ function handleNavigation() {
                     behavior: 'smooth'
                 });
             }
+        });
+    });
+}
+
+// 导航栏滚动效果函数
+function initHeaderScrollEffect() {
+    const header = document.getElementById('main-header');
+    const logo = document.querySelector('.logo-container');
+    const navItems = document.querySelectorAll('nav a');
+    
+    let lastScrollTop = 0;
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // 滚动超过50px时添加滚动样式
+        if (scrollTop > 50) {
+            header.classList.add('scrolled');
+            header.style.padding = '0.5rem 0';
+            header.style.boxShadow = '0 10px 30px -10px rgba(0, 0, 0, 0.1)';
+            
+            // 导航项动画
+            navItems.forEach((item, index) => {
+                item.style.transform = 'translateY(0)';
+                item.style.opacity = '1';
+                item.style.transition = `all 0.3s ease ${index * 0.05}s`;
+            });
+        } else {
+            header.classList.remove('scrolled');
+            header.style.padding = '';
+            header.style.boxShadow = '';
+            
+            // 重置导航项样式
+            navItems.forEach(item => {
+                item.style.transform = '';
+                item.style.opacity = '';
+            });
+        }
+        
+        // 向下滚动时略微收缩导航栏
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // 向下滚动
+            header.style.transform = 'translateY(-10px)';
+            logo.style.transform = 'scale(0.95)';
+        } else {
+            // 向上滚动
+            header.style.transform = 'translateY(0)';
+            logo.style.transform = '';
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+    
+    // 添加导航项悬停时的微动画
+    const navHoverItems = document.querySelectorAll('.nav-hover-effect');
+    navHoverItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = '';
         });
     });
 }

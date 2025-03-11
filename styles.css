@@ -66,7 +66,7 @@ html {
   transform: scale(1.05);
 }
 
-/* 导航栏下划线动画 */
+/* 导航栏下划线动画 - 增强版 */
 .nav-underline {
   position: relative;
 }
@@ -78,19 +78,22 @@ html {
   height: 2px;
   bottom: -2px;
   left: 0;
-  background-color: #4f46e5;
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, #4f46e5, #a855f7);
+  transition: width 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.3);
 }
 
 .nav-underline:hover::after {
   width: 100%;
 }
 
-/* 导航新增悬停效果 */
+/* 导航新增悬停效果 - 增强版 */
 .nav-hover-effect {
   position: relative;
   padding-bottom: 2px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center bottom;
 }
 
 .nav-hover-effect::after {
@@ -100,28 +103,65 @@ html {
   height: 2px;
   bottom: -2px;
   left: 50%;
-  background-color: #4f46e5;
-  transition: all 0.3s ease;
+  background: linear-gradient(90deg, #4f46e5, #a855f7);
+  transition: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
   transform: translateX(-50%);
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.3);
 }
 
 .nav-hover-effect:hover {
   color: #4f46e5;
+  transform: translateY(-2px);
 }
 
 .nav-hover-effect:hover::after {
   width: 100%;
 }
 
-/* 导航栏下拉菜单动画 */
+/* 社交图标优雅悬停效果 */
+.social-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icon::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #4f46e5, #a855f7);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+.social-icon:hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.social-icon:hover {
+  text-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+}
+
+/* 导航栏下拉菜单动画 - 增强版 */
 .dropdown-menu {
   z-index: 100;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  transform-origin: top center;
 }
 
 .dropdown-menu a {
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .dropdown-menu a::before {
@@ -131,8 +171,14 @@ html {
   top: 0;
   width: 4px;
   height: 100%;
-  background-color: #4f46e5;
-  transition: left 0.3s ease;
+  background: linear-gradient(to bottom, #4f46e5, #a855f7);
+  transition: left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 0 10px rgba(79, 70, 229, 0.5);
+}
+
+.dropdown-menu a:hover {
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.08), transparent);
+  transform: translateX(5px);
 }
 
 .dropdown-menu a:hover::before {

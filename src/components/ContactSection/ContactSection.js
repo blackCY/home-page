@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ContactSection.css';
+import AnimatedTitle from '../common/AnimatedTitle/AnimatedTitle';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -56,10 +57,11 @@ const ContactSection = () => {
   return (
     <section id="contact" className="contact-section">
       <div className="container contact-container">
-        <div className="section-header">
-          <h2 className="section-title">与我联系</h2>
-          <p className="section-subtitle">有任何问题或合作意向，请随时联系我</p>
-        </div>
+        <AnimatedTitle 
+          title="与我联系" 
+          subtitle="有任何问题或合作意向，请随时联系我" 
+          className="section-header"
+        />
         
         <div className="contact-content">
           <div className="contact-info">

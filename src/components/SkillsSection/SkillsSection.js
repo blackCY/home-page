@@ -1,6 +1,85 @@
 import React from 'react';
 import './SkillsSection.css';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
+import AnimatedTitle from '../common/AnimatedTitle/AnimatedTitle';
+
+// 技能项组件
+const SkillItem = ({ skill, index }) => {
+  const skillAnimation = useScrollAnimation({
+    animation: 'fade-right',
+    threshold: 0.1,
+    delay: 100 * index + 200
+  });
+  
+  return (
+    <div 
+      key={index} 
+      className="skill-item"
+      ref={skillAnimation.elementRef}
+      style={skillAnimation.style}
+    >
+      <div className="skill-info">
+        <span className="skill-name">{skill.name}</span>
+        <span className="skill-percentage">{skill.level}%</span>
+      </div>
+      <div className="skill-bar">
+        <div 
+          className="skill-progress" 
+          style={{ width: `${skill.level}%` }}
+          data-level={skill.level}
+        ></div>
+      </div>
+    </div>
+  );
+};
+
+// 技能类别组件
+const SkillCategory = ({ category, categoryIndex }) => {
+  const categoryAnimation = useScrollAnimation({
+    animation: 'fade-up',
+    threshold: 0.1,
+    delay: 100 * categoryIndex
+  });
+  
+  return (
+    <div 
+      className="skill-category"
+      ref={categoryAnimation.elementRef}
+      style={categoryAnimation.style}
+    >
+      <h3 className="category-title">{category.title}</h3>
+      
+      <div className="skills-list">
+        {category.skills.map((skill, skillIndex) => (
+          <SkillItem 
+            key={skillIndex}
+            skill={skill}
+            index={skillIndex}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// 其他技能标签组件
+const OtherSkillTag = ({ skill, index }) => {
+  const otherSkillAnimation = useScrollAnimation({
+    animation: 'zoom-in',
+    threshold: 0.1,
+    delay: 50 * index
+  });
+  
+  return (
+    <span 
+      className="other-skill-tag"
+      ref={otherSkillAnimation.elementRef}
+      style={otherSkillAnimation.style}
+    >
+      {skill}
+    </span>
+  );
+};
 
 const SkillsSection = () => {
   // 使用滚动动画
@@ -57,88 +136,33 @@ const SkillsSection = () => {
       ref={sectionAnimation.elementRef}
     >
       <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">我的技能</h2>
-          <p className="section-subtitle">专业技能和工具</p>
-        </div>
+        <AnimatedTitle 
+          title="我的技能" 
+          subtitle="专业技能和工具" 
+          className="section-header"
+        />
         
         <div className="skills-content">
           <div className="skills-categories">
-            {skillCategories.map((category, categoryIndex) => {
-              // 为每个类别创建滚动动画
-              const categoryAnimation = useScrollAnimation({
-                animation: 'fade-up',
-                threshold: 0.1,
-                delay: 100 * categoryIndex
-              });
-              
-              return (
-                <div 
-                  key={categoryIndex} 
-                  className="skill-category"
-                  ref={categoryAnimation.elementRef}
-                  style={categoryAnimation.style}
-                >
-                  <h3 className="category-title">{category.title}</h3>
-                  
-                  <div className="skills-list">
-                    {category.skills.map((skill, skillIndex) => {
-                      // 为每个技能创建滚动动画
-                      const skillAnimation = useScrollAnimation({
-                        animation: 'fade-right',
-                        threshold: 0.1,
-                        delay: 100 * skillIndex + 200
-                      });
-                      
-                      return (
-                        <div 
-                          key={skillIndex} 
-                          className="skill-item"
-                          ref={skillAnimation.elementRef}
-                          style={skillAnimation.style}
-                        >
-                          <div className="skill-info">
-                            <span className="skill-name">{skill.name}</span>
-                            <span className="skill-percentage">{skill.level}%</span>
-                          </div>
-                          <div className="skill-bar">
-                            <div 
-                              className="skill-progress" 
-                              style={{ width: `${skill.level}%` }}
-                              data-level={skill.level}
-                            ></div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
+            {skillCategories.map((category, categoryIndex) => (
+              <SkillCategory 
+                key={categoryIndex}
+                category={category}
+                categoryIndex={categoryIndex}
+              />
+            ))}
           </div>
           
           <div className="other-skills">
             <h3 className="other-skills-title">其他技能</h3>
             <div className="other-skills-cloud">
-              {otherSkills.map((skill, index) => {
-                // 为每个其他技能创建滚动动画
-                const otherSkillAnimation = useScrollAnimation({
-                  animation: 'zoom-in',
-                  threshold: 0.1,
-                  delay: 50 * index
-                });
-                
-                return (
-                  <span 
-                    key={index} 
-                    className="other-skill-tag"
-                    ref={otherSkillAnimation.elementRef}
-                    style={otherSkillAnimation.style}
-                  >
-                    {skill}
-                  </span>
-                );
-              })}
+              {otherSkills.map((skill, index) => (
+                <OtherSkillTag 
+                  key={index}
+                  skill={skill}
+                  index={index}
+                />
+              ))}
             </div>
           </div>
         </div>

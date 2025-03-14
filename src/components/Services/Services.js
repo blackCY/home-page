@@ -1,6 +1,7 @@
 import React from 'react';
 import './Services.css';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
+import AnimatedTitle from '../common/AnimatedTitle/AnimatedTitle';
 
 const Services = () => {
   // 使用滚动动画
@@ -98,27 +99,43 @@ const Services = () => {
       ref={sectionAnimation.elementRef}
     >
       <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">我的服务</h2>
-          <p className="section-subtitle">专业解决方案，助力您的业务成功</p>
-        </div>
+        <AnimatedTitle 
+          title="我的服务" 
+          subtitle="专业解决方案，助力您的业务成功" 
+          className="section-header"
+        />
         
         <div className="services-grid">
           {servicesData.map((service, index) => {
-            // 为每个服务创建滚动动画
-            const serviceAnimation = useScrollAnimation({
-              animation: 'fade-up',
-              threshold: 0.1,
-              delay: 200 * index
-            });
-            
             return (
-              <div 
-                key={service.id} 
-                className="service-card"
-                ref={serviceAnimation.elementRef}
-                style={serviceAnimation.style}
-              >
+              <ServiceCard 
+                key={service.id}
+                service={service}
+                index={index}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// 提取为单独的组件以避免在回调中使用 Hook
+const ServiceCard = ({ service, index }) => {
+  // 为每个服务创建滚动动画
+  const serviceAnimation = useScrollAnimation({
+    animation: 'fade-up',
+    threshold: 0.1,
+    delay: 200 * index
+  });
+  
+  return (
+    <div 
+      className="service-card"
+      ref={serviceAnimation.elementRef}
+      style={serviceAnimation.style}
+    >
                 <div className="service-icon">
                   {service.icon}
                 </div>
@@ -145,11 +162,6 @@ const Services = () => {
                   </svg>
                 </a>
               </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
   );
 };
 

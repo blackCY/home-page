@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import './ParallaxSection.css';
 import { useParallax } from '../../contexts/ParallaxContext';
 import Card from '../common/Card/Card';
+import AnimatedTitle from '../common/AnimatedTitle/AnimatedTitle';
 
 const ParallaxSection = () => {
   const { enabled, toggleParallax } = useParallax();
@@ -92,10 +93,11 @@ const ParallaxSection = () => {
   return (
     <section id="my-world" className="parallax-section" ref={sectionRef}>
       <div className="container parallax-container">
-        <div className="section-header">
-          <h2 className="section-title">我的世界</h2>
-          <p className="section-subtitle">探索我的兴趣、爱好和创作</p>
-        </div>
+        <AnimatedTitle 
+          title="我的世界" 
+          subtitle="探索我的兴趣、爱好和创作" 
+          className="section-header"
+        />
         
         <div className="parallax-toggle-container">
           <button 

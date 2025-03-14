@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './ProjectsSection.css';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
+import AnimatedTitle from '../common/AnimatedTitle/AnimatedTitle';
 
 const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -89,10 +90,11 @@ const ProjectsSection = () => {
       ref={sectionAnimation.elementRef}
     >
       <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">我的作品</h2>
-          <p className="section-subtitle">探索我的创意项目和设计作品</p>
-        </div>
+        <AnimatedTitle 
+          title="我的作品" 
+          subtitle="探索我的创意项目和设计作品" 
+          className="section-header"
+        />
         
         <div className="projects-filter">
           {categories.map(category => (
@@ -107,52 +109,52 @@ const ProjectsSection = () => {
         </div>
         
         <div className="projects-grid">
-          {filteredProjects.map((project, index) => {
-            // 为每个项目创建单独的动画
-            const projectAnimation = useScrollAnimation({
-              animation: 'fade-up',
-              threshold: 0.1,
-              delay: 100 * index
-            });
-            
-            return (
-              <div 
-                key={project.id} 
-                className="project-card"
-                ref={projectAnimation.elementRef}
-                style={projectAnimation.style}
-              >
-                <div className="project-image">
-                  <img src={project.image} alt={project.title} />
-                  <div className="project-overlay">
-                    <a href={project.link} className="project-link">
-                      查看详情
-                    </a>
-                  </div>
-                </div>
-                <div className="project-info">
-                  <h3 className="project-title">{project.title}</h3>
-                  <p className="project-category">{categories.find(c => c.id === project.category).name}</p>
-                  <p className="project-description">{project.description}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        
-        {filteredProjects.length === 0 && (
-          <div className="no-projects">
-            <p>该类别下暂无项目</p>
-          </div>
-        )}
-        
-        <div className="projects-more">
-          <a href="#" className="btn btn-primary">
-            查看更多作品
-          </a>
+          {filteredProjects.map((project, index) => (
+            <ProjectCard 
+              key={project.id}
+              project={project}
+              index={index}
+              categories={categories}
+            />
+          ))}
         </div>
       </div>
     </section>
+  );
+};
+
+// 提取为单独的组件以避免在回调中使用 Hook
+const ProjectCard = ({ project, index, categories }) => {
+  // 为每个项目创建单独的动画
+  const projectAnimation = useScrollAnimation({
+    animation: 'fade-up',
+    threshold: 0.1,
+    delay: 100 * index
+  });
+  
+  return (
+    <div 
+      className="project-card"
+      ref={projectAnimation.elementRef}
+      style={projectAnimation.style}
+    >
+      <div className="project-image">
+        <img src={project.image} alt={project.title} />
+        <div className="project-overlay">
+          <button 
+            onClick={() => window.open(project.link, '_blank')} 
+            className="project-link"
+          >
+            查看详情
+          </button>
+        </div>
+      </div>
+      <div className="project-info">
+        <h3 className="project-title">{project.title}</h3>
+        <p className="project-category">{categories.find(c => c.id === project.category).name}</p>
+        <p className="project-description">{project.description}</p>
+      </div>
+    </div>
   );
 };
 

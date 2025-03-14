@@ -1,6 +1,7 @@
 import React from 'react';
 import './AboutSection.css';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
+import AnimatedTitle from '../common/AnimatedTitle/AnimatedTitle';
 
 const AboutSection = () => {
   // 使用滚动动画
@@ -40,10 +41,11 @@ const AboutSection = () => {
       ref={sectionAnimation.elementRef}
     >
       <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">关于我</h2>
-          <p className="section-subtitle">了解更多关于我的信息</p>
-        </div>
+        <AnimatedTitle 
+          title="关于我" 
+          subtitle="了解更多关于我的信息" 
+          className="section-header"
+        />
         
         <div className="about-content">
           <div 
@@ -73,7 +75,7 @@ const AboutSection = () => {
             
             <div className="about-cta">
               <a href="#contact" className="btn btn-primary">联系我</a>
-              <a href="#" className="btn btn-secondary">下载简历</a>
+              <button onClick={() => window.open('/resume.pdf', '_blank')} className="btn btn-secondary">下载简历</button>
             </div>
           </div>
           

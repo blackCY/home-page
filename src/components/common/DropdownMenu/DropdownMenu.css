@@ -135,9 +135,10 @@
 .item-content h3 {
   margin: 0 0 0.2rem;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: var(--font-weight-cn-medium);
   color: #333;
   transition: all 0.3s ease;
+  font-family: var(--font-family-base);
 }
 
 .item-content p {
@@ -145,6 +146,8 @@
   font-size: 0.8rem;
   color: #666;
   line-height: 1.3;
+  font-weight: var(--font-weight-cn-light);
+  font-family: var(--font-family-base);
 }
 
 .dropdown-item-image {
@@ -209,10 +212,11 @@
 
 .header-title {
   margin: 0 0 0.2rem 0;
-  font-weight: 600;
+  font-weight: var(--font-weight-cn-medium);
   font-size: 0.95rem;
   color: #4f46e5;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  font-family: var(--font-family-base);
 }
 
 .header-description {
@@ -220,6 +224,8 @@
   font-size: 0.8rem;
   color: #666;
   line-height: 1.3;
+  font-weight: var(--font-weight-cn-light);
+  font-family: var(--font-family-base);
 }
 
 /* 添加图标样式 */

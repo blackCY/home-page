@@ -12,15 +12,24 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
+      // 使用更平滑的滚动检测
+      if (scrollPosition > 30) {
+        if (!isScrolled) setIsScrolled(true);
+      } else {
+        if (isScrolled) setIsScrolled(false);
+      }
     };
     
-    window.addEventListener('scroll', handleScroll);
+    // 初始检查
+    handleScroll();
+    
+    // 使用passive: true以提高性能
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [isScrolled]);
   
   // 切换移动菜单
   const toggleMobileMenu = () => {

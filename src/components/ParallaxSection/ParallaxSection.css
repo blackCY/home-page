@@ -3,6 +3,11 @@
   padding: 6rem 0;
   background: linear-gradient(135deg, var(--color-white) 0%, var(--color-slate-50) 100%);
   overflow: hidden;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23f0f9ff' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23e0f2fe' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23dbeafe' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23c7d2fe' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23e0e7ff' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23c4b5fd' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23f5f3ff' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23ede9fe' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23faf5ff' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23f3e8ff' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23f8fafc' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23f1f5f9' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .parallax-container {

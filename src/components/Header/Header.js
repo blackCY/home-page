@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Header.css';
 import DropdownMenu from '../common/DropdownMenu/DropdownMenu';
-import SocialIcons from '../common/SocialIcons/SocialIcons';
 import ThemeSwitch from '../common/ThemeSwitch/ThemeSwitch';
+import { FaGithub, FaWeixin, FaEnvelope } from 'react-icons/fa';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,38 +37,58 @@ const Header = () => {
       hasDropdown: true,
       dropdownItems: [
         { 
-          title: '个人网站', 
-          href: '#personal-website',
-          image: '/images/project1.jpg',
-          description: '使用现代技术栈构建的个人展示网站' 
+          title: '我的作品',
+          href: '#projects',
+          subtitle: '探索我的创意作品'
         },
         { 
-          title: '数据可视化', 
-          href: '#data-viz',
-          image: '/images/project2.jpg',
-          description: '基于大数据的交互式可视化项目' 
+          title: 'Web 项目', 
+          href: '#web-projects',
+          description: '响应式网站与前端应用开发',
+          icon: 'fas fa-laptop-code',
+          iconBg: '#eef1ff'
         },
         { 
-          title: 'AI应用', 
-          href: '#ai-app',
-          image: '/images/project3.jpg',
-          description: '结合机器学习的智能应用程序' 
+          title: '移动应用', 
+          href: '#mobile-apps',
+          description: '原生与跨平台移动应用开发',
+          icon: 'fas fa-mobile-alt',
+          iconBg: '#e6f2ff'
+        },
+        { 
+          title: 'AI 研究', 
+          href: '#ai-research',
+          description: '人工智能与机器学习探索',
+          icon: 'fas fa-robot',
+          iconBg: '#f3e8ff'
+        },
+        { 
+          title: '开源贡献', 
+          href: '#open-source',
+          description: '开源社区项目与贡献',
+          icon: 'fas fa-code-branch',
+          iconBg: '#e6faff'
         }
       ]
     },
-    { title: '与我联系', href: '#contact' }
+    { title: '技能分享', href: '#skills' },
+    { title: '生活记录', href: '#life' },
+    { title: '联系咨询', href: '#contact' }
   ];
   
   return (
     <header className={`site-header ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="container header-container">
-        {/* Logo */}
-        <a href="#home" className="logo">
-          <span className="logo-text">我的空间</span>
-        </a>
+      <div className="header-container">
+        <div className="header-left">
+          {/* Logo */}
+          <a href="#home" className="logo">
+            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=100&auto=format&fit=crop&q=80" alt="网站Logo" className="logo-img" />
+            <span className="logo-text">我的世界</span>
+          </a>
+        </div>
         
-        {/* 桌面导航 */}
-        <nav className="main-nav desktop-nav">
+        {/* 中间导航 */}
+        <nav className="main-nav">
           <ul className="nav-list">
             {navItems.map((item, index) => (
               <li key={index} className="nav-item">
@@ -82,12 +102,20 @@ const Header = () => {
           </ul>
         </nav>
         
-        {/* 社交图标和主题切换 */}
-        <div className="header-actions">
-          <ThemeSwitch />
-          <div className="social-icons-wrapper">
-            <SocialIcons />
+        {/* 右侧社交图标 */}
+        <div className="header-right">
+          <div className="social-icons">
+            <a href="https://github.com/username" className="social-icon" target="_blank" rel="noopener noreferrer">
+              <FaGithub />
+            </a>
+            <a href="https://weixin.qq.com" className="social-icon" target="_blank" rel="noopener noreferrer">
+              <FaWeixin />
+            </a>
+            <a href="mailto:example@example.com" className="social-icon">
+              <FaEnvelope />
+            </a>
           </div>
+          <ThemeSwitch />
         </div>
         
         {/* 移动菜单按钮 */}

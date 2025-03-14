@@ -3,41 +3,95 @@ import './DropdownMenu.css';
 
 const DropdownMenu = ({ item }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMenuHovered, setIsMenuHovered] = useState(false);
   const dropdownRef = useRef(null);
   
-  // 切换下拉菜单
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+  // 处理菜单按钮的鼠标进入
+  const handleToggleMouseEnter = () => {
+    setIsHovered(true);
   };
   
-  // 点击外部关闭下拉菜单
+  // 处理菜单按钮的鼠标离开
+  const handleToggleMouseLeave = () => {
+    setIsHovered(false);
+  };
+  
+  // 处理下拉菜单的鼠标进入
+  const handleMenuMouseEnter = () => {
+    setIsMenuHovered(true);
+  };
+  
+  // 处理下拉菜单的鼠标离开
+  const handleMenuMouseLeave = () => {
+    setIsMenuHovered(false);
+  };
+  
+  // 根据鼠标悬停状态更新下拉菜单的显示状态
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    if (isHovered || isMenuHovered) {
+      setIsOpen(true);
+    } else {
+      const timer = setTimeout(() => {
         setIsOpen(false);
-      }
+      }, 300); // 更长的延时确保更流畅的过渡
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isHovered, isMenuHovered]);
+  
+  // 移动设备触摸事件支持
+  useEffect(() => {
+    const handleTouchStart = (e) => {
+      e.preventDefault();
+      setIsOpen(!isOpen);
     };
     
-    document.addEventListener('mousedown', handleClickOutside);
+    const currentRef = dropdownRef.current;
+    if (currentRef) {
+      const toggleButton = currentRef.querySelector('.dropdown-toggle');
+      if (toggleButton) {
+        toggleButton.addEventListener('touchstart', handleTouchStart);
+      }
+    }
+    
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      if (currentRef) {
+        const toggleButton = currentRef.querySelector('.dropdown-toggle');
+        if (toggleButton) {
+          toggleButton.removeEventListener('touchstart', handleTouchStart);
+        }
+      }
     };
-  }, []);
+  }, [isOpen]);
   
   return (
-    <div className="dropdown-container" ref={dropdownRef}>
+    <div 
+      className="dropdown-container" 
+      ref={dropdownRef}
+    >
       <button 
         className="dropdown-toggle nav-link" 
-        onClick={toggleDropdown}
         aria-expanded={isOpen}
         aria-haspopup="true"
+        onMouseEnter={handleToggleMouseEnter}
+        onMouseLeave={handleToggleMouseLeave}
       >
         {item.title}
         <i className={`fas fa-chevron-down dropdown-icon ${isOpen ? 'open' : ''}`}></i>
       </button>
       
       {isOpen && (
-        <div className="dropdown-menu">
+        <div 
+          className="dropdown-menu"
+          onMouseEnter={handleMenuMouseEnter}
+          onMouseLeave={handleMenuMouseLeave}
+        >
+          <div className="dropdown-header">
+            <h3 className="header-title">我的创作</h3>
+            <p className="header-description">探索我的项目作品集</p>
+          </div>
+          
           {item.dropdownItems.map((dropdownItem, index) => (
             <a 
               key={index} 
@@ -45,18 +99,25 @@ const DropdownMenu = ({ item }) => {
               className="dropdown-item"
               onClick={() => setIsOpen(false)}
             >
-              <div className="dropdown-item-content">
-                {dropdownItem.image && (
-                  <div className="dropdown-item-image">
-                    <img src={dropdownItem.image} alt={dropdownItem.title} />
-                  </div>
+              <div className="dropdown-item-image item-icon" style={{backgroundColor: dropdownItem.iconBg || '#f0f4ff'}}>
+                {dropdownItem.icon ? (
+                  <i className={dropdownItem.icon}></i>
+                ) : dropdownItem.image ? (
+                  <img src={dropdownItem.image} alt={dropdownItem.title} />
+                ) : (
+                  <span className="fallback-icon">{dropdownItem.title.charAt(0)}</span>
                 )}
-                <div className="dropdown-item-text">
-                  <h4>{dropdownItem.title}</h4>
-                  {dropdownItem.description && (
-                    <p>{dropdownItem.description}</p>
-                  )}
-                </div>
+              </div>
+              
+              <div className="item-content">
+                <h3>{dropdownItem.title}</h3>
+                {dropdownItem.description && (
+                  <p>{dropdownItem.description}</p>
+                )}
+              </div>
+              
+              <div className="arrow-icon">
+                <i className="fas fa-chevron-right"></i>
               </div>
             </a>
           ))}

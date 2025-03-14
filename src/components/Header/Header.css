@@ -3,9 +3,11 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   z-index: 1000;
-  transition: all var(--transition-normal) var(--ease-custom);
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
 .site-header.scrolled {
@@ -15,43 +17,75 @@
   padding: 0.5rem 0;
 }
 
+.theme-dark .site-header {
+  background-color: #1a202c;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
 .theme-dark .site-header.scrolled {
-  background-color: rgba(31, 41, 55, 0.9);
+  background-color: rgba(26, 32, 44, 0.9);
 }
 
 .header-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.header-left {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  flex: 0 0 auto;
 }
 
 /* Logo 样式 */
 .logo {
   display: flex;
   align-items: center;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-indigo-600);
-  transition: all var(--transition-normal) var(--ease-custom);
+  text-decoration: none;
+}
+
+.logo-img {
+  width: 36px;
+  height: 36px;
+  margin-right: 0.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo:hover .logo-img {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .logo-text {
-  background: linear-gradient(135deg, var(--color-indigo-500), var(--color-purple-500));
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: gradient-shift 5s ease infinite;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.theme-dark .logo-text {
+  color: #f7fafc;
 }
 
 .scrolled .logo-text {
   font-size: var(--font-size-lg);
 }
 
-/* 桌面导航 */
+/* 主导航 */
 .main-nav {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin: 0 20px;
 }
 
 .nav-list {
@@ -64,19 +98,33 @@
 
 .nav-item {
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .nav-link {
-  color: var(--color-text);
-  font-weight: var(--font-weight-medium);
+  color: #333;
+  font-weight: 500;
   text-decoration: none;
   padding: 0.5rem 0;
-  transition: all var(--transition-normal) var(--ease-custom);
+  transition: all 0.3s ease;
   position: relative;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.theme-dark .nav-link {
+  color: #e2e8f0;
 }
 
 .nav-link:hover {
-  color: var(--color-primary);
+  color: #4f46e5;
+}
+
+.theme-dark .nav-link:hover {
+  color: #7f9cf5;
 }
 
 .nav-link::after {
@@ -86,8 +134,12 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
-  transition: width var(--transition-normal) var(--ease-custom);
+  background: #4f46e5;
+  transition: width 0.3s ease;
+}
+
+.theme-dark .nav-link::after {
+  background: #7f9cf5;
 }
 
 .nav-link:hover::after {
@@ -197,39 +249,65 @@
   opacity: 1;
 }
 
-/* 头部操作区（主题切换和社交图标） */
-.header-actions {
+/* 头部右侧区域 */
+.header-right {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
+  flex: 0 0 auto;
+}
+
+/* 社交图标区 */
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* 社交图标 */
-.social-icons-wrapper {
+.social-icon {
   display: flex;
   align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.theme-dark .social-icon {
+  color: #a0aec0;
+}
+
+.social-icon:hover {
+  color: #4f46e5;
+}
+
+.theme-dark .social-icon:hover {
+  color: #7f9cf5;
 }
 
 /* 响应式设计 */
 @media (max-width: 1024px) {
-  .header-actions {
-    gap: 1rem;
+  .header-right {
+    gap: 0.75rem;
   }
-  .desktop-nav {
+  
+  .main-nav {
     display: none;
   }
   
   .mobile-menu-toggle {
     display: flex;
   }
-  
-  .social-icons-wrapper {
-    margin-right: 2rem;
-  }
 }
 
 @media (max-width: 640px) {
-  .social-icons-wrapper {
+  .social-icons .social-icon:nth-child(2),
+  .social-icons .social-icon:nth-child(3) {
+    display: none;
+  }
+  
+  .logo-text {
     display: none;
   }
 }

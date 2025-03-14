@@ -1,0 +1,230 @@
+.projects-section {
+  position: relative;
+  padding: 6rem 0;
+  background-color: var(--color-slate-50);
+  overflow: hidden;
+}
+
+.projects-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+  z-index: 0;
+}
+
+/* 项目过滤器 */
+.projects-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.filter-btn {
+  padding: 0.625rem 1.25rem;
+  background-color: transparent;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--border-radius-full);
+  color: var(--color-gray-600);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-normal) var(--ease-custom);
+}
+
+.filter-btn:hover {
+  border-color: var(--color-indigo-400);
+  color: var(--color-indigo-600);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, var(--color-indigo-500), var(--color-purple-500));
+  border-color: transparent;
+  color: var(--color-white);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+/* 项目网格 */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+/* 项目卡片 */
+.project-card {
+  position: relative;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal) var(--ease-custom);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.project-card.fade-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* 不规则形状卡片 */
+.project-card:nth-child(3n+1) {
+  border-radius: 30px 10px 40px 15px;
+}
+
+.project-card:nth-child(3n+2) {
+  border-radius: 15px 35px 10px 25px;
+}
+
+.project-card:nth-child(3n+3) {
+  border-radius: 20px 20px 40px 10px;
+}
+
+/* 项目图片 */
+.project-image {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-custom);
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.1);
+}
+
+/* 项目覆盖层 */
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-custom);
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-link {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-gray-900);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  transform: translateY(20px);
+  transition: all 0.4s var(--ease-custom);
+}
+
+.project-card:hover .project-link {
+  transform: translateY(0);
+}
+
+.project-link:hover {
+  background: var(--color-white);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 项目信息 */
+.project-info {
+  padding: 1.5rem;
+}
+
+.project-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.project-category {
+  font-size: var(--font-size-xs);
+  color: var(--color-indigo-500);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.project-category::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(to right, var(--color-indigo-400), var(--color-purple-400));
+  border-radius: var(--border-radius-full);
+}
+
+.project-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  line-height: 1.6;
+}
+
+/* 无项目提示 */
+.no-projects {
+  text-align: center;
+  padding: 3rem 0;
+  color: var(--color-gray-500);
+}
+
+/* 查看更多按钮 */
+.projects-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .projects-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    justify-content: flex-start;
+  }
+  
+  .filter-btn {
+    white-space: nowrap;
+  }
+}

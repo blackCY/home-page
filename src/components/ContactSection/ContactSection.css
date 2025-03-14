@@ -1,0 +1,177 @@
+.contact-section {
+  position: relative;
+  padding: 6rem 0;
+  background: linear-gradient(135deg, var(--color-slate-50), var(--color-indigo-50));
+  overflow: hidden;
+}
+
+.contact-container {
+  position: relative;
+  z-index: 10;
+}
+
+.contact-content {
+  display: flex;
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+/* 联系信息样式 */
+.contact-info {
+  flex: 1;
+  position: relative;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--color-indigo-600), var(--color-purple-600));
+  border-radius: var(--border-radius-2xl);
+  color: var(--color-white);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.contact-info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-lg);
+  margin-right: 1rem;
+  font-size: var(--font-size-xl);
+}
+
+.contact-info-text h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 0.5rem;
+}
+
+.contact-info-text p {
+  font-size: var(--font-size-base);
+  opacity: 0.9;
+}
+
+.contact-decoration {
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.contact-decoration::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: 30px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+/* 联系表单样式 */
+.contact-form-container {
+  flex: 1.5;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-2xl);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-700);
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--border-radius-lg);
+  font-size: var(--font-size-base);
+  transition: all var(--transition-normal) var(--ease-custom);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-indigo-400);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.submit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, var(--color-indigo-500), var(--color-purple-500));
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-normal) var(--ease-custom);
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+}
+
+.form-message {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: var(--border-radius-lg);
+  font-size: var(--font-size-base);
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.form-message.success {
+  background-color: var(--color-green-100);
+  color: var(--color-green-800);
+  border: 1px solid var(--color-green-200);
+}
+
+.form-message.error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .contact-content {
+    flex-direction: column;
+  }
+  
+  .contact-info,
+  .contact-form-container {
+    width: 100%;
+  }
+}

@@ -1,0 +1,234 @@
+/* 动画定义 */
+
+/* 渐变文字动画 */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 背景渐变动画 */
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 浮动动画 */
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05);
+  }
+  100% {
+    transform: translateY(10px) scale(0.95);
+  }
+}
+
+/* 下滑动画 */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 上滑动画 */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 左滑动画 */
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 右滑动画 */
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 脉冲动画 */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 旋转动画 */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Logo动画 */
+@keyframes logoAnimation {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(79, 70, 229, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(79, 70, 229, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(79, 70, 229, 0.4);
+  }
+}
+
+/* 动画类 */
+.animated-gradient-text {
+  background-size: 200% auto;
+  animation: gradient-shift 5s ease infinite;
+}
+
+.slide-down {
+  animation: slideDown 0.3s ease forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease forwards;
+}
+
+.slide-left {
+  animation: slideLeft 0.3s ease forwards;
+}
+
+.slide-right {
+  animation: slideRight 0.3s ease forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.pulse {
+  animation: pulse 2s ease infinite;
+}
+
+.rotate {
+  animation: rotate 2s linear infinite;
+}
+
+.logo-animation {
+  animation: logoAnimation 3s ease infinite;
+}
+
+/* 过渡效果类 */
+.transition-all {
+  transition: all var(--transition-normal) var(--ease-custom);
+}
+
+.transition-transform {
+  transition: transform var(--transition-normal) var(--ease-custom);
+}
+
+.transition-colors {
+  transition: color var(--transition-normal) var(--ease-custom), background-color var(--transition-normal) var(--ease-custom);
+}
+
+.transition-shadow {
+  transition: box-shadow var(--transition-normal) var(--ease-custom);
+}
+
+.transition-opacity {
+  transition: opacity var(--transition-normal) var(--ease-custom);
+}
+
+/* 悬停效果类 */
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-translate-y:hover {
+  transform: translateY(-5px);
+}
+
+.hover-shadow:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.hover-brightness:hover {
+  filter: brightness(1.1);
+}
+
+/* 动画延迟类 */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}

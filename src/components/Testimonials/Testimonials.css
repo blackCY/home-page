@@ -1,0 +1,247 @@
+.testimonials-section {
+  position: relative;
+  padding: 6rem 0;
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+
+.testimonials-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 70% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 30% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+  z-index: 0;
+}
+
+/* 轮播容器 */
+.testimonials-carousel {
+  position: relative;
+  z-index: 1;
+  margin-top: 3rem;
+  padding: 2rem 0;
+  overflow: hidden;
+}
+
+.testimonials-wrapper {
+  display: flex;
+  transition: transform 0.5s var(--ease-custom);
+}
+
+/* 评价项目 */
+.testimonial-item {
+  flex: 0 0 100%;
+  padding: 0 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--transition-normal) var(--ease-custom);
+}
+
+.testimonial-item.fade-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.testimonial-content {
+  background-color: var(--color-white);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-2xl);
+  /* 不规则形状设计 */
+  border-radius: 40px 20px 60px 20px;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-normal) var(--ease-custom);
+  position: relative;
+}
+
+.testimonial-content::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 40px;
+  width: 80%;
+  height: 30px;
+  background: linear-gradient(135deg, var(--color-indigo-100), var(--color-purple-100));
+  border-radius: 40px 20px;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.testimonial-content:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* 引用图标 */
+.quote-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+  color: var(--color-indigo-400);
+  opacity: 0.8;
+}
+
+/* 评价文本 */
+.testimonial-text {
+  font-size: var(--font-size-lg);
+  line-height: 1.8;
+  color: var(--color-gray-700);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+/* 星级评分 */
+.testimonial-rating {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.star {
+  font-size: var(--font-size-xl);
+  color: var(--color-gray-300);
+  margin-right: 0.25rem;
+}
+
+.star.filled {
+  background: linear-gradient(135deg, var(--color-indigo-500), var(--color-purple-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 作者信息 */
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--color-gray-200);
+  padding-top: 1.5rem;
+}
+
+.author-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+  margin-right: 1rem;
+  /* 不规则形状设计 */
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  box-shadow: var(--shadow-md);
+  border: 3px solid var(--color-white);
+}
+
+.author-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.author-name {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin-bottom: 0.25rem;
+}
+
+.author-position {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+}
+
+/* 轮播控制 */
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.carousel-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, var(--color-indigo-500), var(--color-purple-500));
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius-full);
+  cursor: pointer;
+  transition: all var(--transition-normal) var(--ease-custom);
+  box-shadow: var(--shadow-md);
+}
+
+.carousel-control:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.carousel-indicators {
+  display: flex;
+  align-items: center;
+  margin: 0 1.5rem;
+}
+
+.carousel-indicator {
+  width: 12px;
+  height: 12px;
+  margin: 0 0.5rem;
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-gray-300);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-normal) var(--ease-custom);
+}
+
+.carousel-indicator.active {
+  width: 30px;
+  background: linear-gradient(135deg, var(--color-indigo-500), var(--color-purple-500));
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .testimonials-section {
+    padding: 5rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials-section {
+    padding: 4rem 0;
+  }
+  
+  .testimonial-content {
+    padding: 2rem;
+  }
+  
+  .testimonial-text {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonial-content {
+    padding: 1.5rem;
+  }
+  
+  .author-avatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .carousel-control {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .carousel-indicator {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .carousel-indicator.active {
+    width: 25px;
+  }
+}

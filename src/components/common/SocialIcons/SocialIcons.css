@@ -1,0 +1,40 @@
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.social-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-600);
+  transition: all var(--transition-normal) var(--ease-custom);
+  padding: 0.25rem;
+}
+
+/* 优雅的下划线动画效果 */
+.social-icon::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--color-indigo-400), var(--color-purple-400));
+  transition: all var(--transition-normal) var(--ease-custom);
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+.social-icon:hover {
+  color: var(--color-indigo-600);
+  transform: translateY(-3px);
+}
+
+.social-icon:hover::after {
+  width: 100%;
+  opacity: 1;
+}

@@ -1,0 +1,147 @@
+/* App.css - 全局应用样式 */
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal) var(--ease-custom),
+              color var(--transition-normal) var(--ease-custom);
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 容器样式 */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* 通用部分标题样式 */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-heading);
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  transition: color var(--transition-normal) var(--ease-custom);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  border-radius: var(--border-radius-full);
+  transition: background var(--transition-normal) var(--ease-custom);
+}
+
+.section-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto;
+  transition: color var(--transition-normal) var(--ease-custom);
+}
+
+/* 通用按钮样式 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-lg);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-normal) var(--ease-custom);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: var(--color-white);
+  border: none;
+  box-shadow: 0 4px 15px rgba(var(--color-primary-rgb, 79, 70, 229), 0.4);
+  transition: all var(--transition-normal) var(--ease-custom);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(var(--color-primary-rgb, 79, 70, 229), 0.5);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  transition: all var(--transition-normal) var(--ease-custom);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(var(--color-primary-rgb, 79, 70, 229), 0.1);
+  border-color: var(--color-primary);
+}
+
+/* 响应式设计 */
+@media (max-width: 1280px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 768px;
+  }
+  
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .section-subtitle {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 640px;
+    padding: 0 1.5rem;
+  }
+  
+  .section-header {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .section-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .btn {
+    padding: 0.625rem 1.25rem;
+  }
+}

@@ -1,0 +1,259 @@
+.timeline-section {
+  position: relative;
+  padding: 6rem 0;
+  background-color: var(--color-slate-50);
+  overflow: hidden;
+}
+
+.timeline-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+  z-index: 0;
+}
+
+.timeline-container {
+  position: relative;
+  z-index: 1;
+  margin-top: 4rem;
+  padding: 2rem 0;
+}
+
+/* 时间线中央线 */
+.timeline-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--color-indigo-400), var(--color-purple-400));
+  transform: translateX(-50%);
+  border-radius: var(--border-radius-full);
+  z-index: 1;
+}
+
+/* 时间线项目 */
+.timeline-item {
+  position: relative;
+  margin-bottom: 4rem;
+  width: 50%;
+  opacity: 0;
+}
+
+.timeline-item.fade-right {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.timeline-item.fade-left {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 左侧项目 */
+.timeline-item.left {
+  padding-right: 3rem;
+  transform: translateX(-20px);
+  transition: all var(--transition-normal) var(--ease-custom);
+}
+
+/* 右侧项目 */
+.timeline-item.right {
+  left: 50%;
+  padding-left: 3rem;
+  transform: translateX(20px);
+  transition: all var(--transition-normal) var(--ease-custom);
+}
+
+/* 时间线圆点 */
+.timeline-dot {
+  position: absolute;
+  top: 1.5rem;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, var(--color-indigo-500), var(--color-purple-500));
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+.timeline-item.left .timeline-dot {
+  right: -10px;
+}
+
+.timeline-item.right .timeline-dot {
+  left: -10px;
+}
+
+/* 时间线内容 */
+.timeline-content {
+  padding: 2rem;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-normal) var(--ease-custom);
+}
+
+/* 不规则形状设计 */
+.timeline-item:nth-child(odd) .timeline-content {
+  border-radius: 30px 10px 40px 15px;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  border-radius: 10px 30px 15px 40px;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* 时间线头部 */
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.timeline-type {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  background: linear-gradient(135deg, var(--color-indigo-500), var(--color-purple-500));
+  color: var(--color-white);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--border-radius-full);
+}
+
+.timeline-period {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+}
+
+/* 时间线标题 */
+.timeline-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-organization {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-indigo-600);
+  margin-bottom: 1rem;
+}
+
+.timeline-description {
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  color: var(--color-gray-700);
+  margin-bottom: 1.5rem;
+}
+
+/* 成就列表 */
+.timeline-achievements {
+  background-color: var(--color-slate-50);
+  padding: 1.5rem;
+  border-radius: var(--border-radius-lg);
+}
+
+.achievements-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-800);
+  margin-bottom: 1rem;
+}
+
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.achievement-item {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-700);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.achievement-item::before {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, var(--color-indigo-400), var(--color-purple-400));
+  border-radius: 50%;
+}
+
+/* 工作经验和教育背景样式区分 */
+.timeline-item.experience .timeline-content {
+  border-left: 4px solid var(--color-indigo-500);
+}
+
+.timeline-item.education .timeline-content {
+  border-left: 4px solid var(--color-purple-500);
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .timeline-line {
+    left: 30px;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    padding-left: 80px;
+    padding-right: 0;
+  }
+  
+  .timeline-item.left,
+  .timeline-item.right {
+    left: 0;
+    padding-left: 80px;
+    padding-right: 0;
+  }
+  
+  .timeline-item.left .timeline-dot,
+  .timeline-item.right .timeline-dot {
+    left: 20px;
+    right: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-section {
+    padding: 4rem 0;
+  }
+  
+  .timeline-content {
+    padding: 1.5rem;
+  }
+  
+  .timeline-title {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .timeline-achievements {
+    padding: 1rem;
+  }
+}

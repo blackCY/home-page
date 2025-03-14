@@ -12,25 +12,25 @@ const Footer = () => {
       links: [
         { name: '首页', href: '#home' },
         { name: '我的世界', href: '#my-world' },
-        { name: '我的作品', href: '#projects' },
-        { name: '与我联系', href: '#contact' }
+        { name: '我的服务', href: '#services' },
+        { name: '我的作品', href: '#projects' }
       ]
     },
     {
       title: '资源',
       links: [
-        { name: '博客', href: '#blog' },
-        { name: '项目', href: '#projects' },
-        { name: '教程', href: '#tutorials' },
-        { name: '资源库', href: '#resources' }
+        { name: 'Web 项目', href: '#web-projects' },
+        { name: '移动应用', href: '#mobile-apps' },
+        { name: 'AI 研究', href: '#ai-research' },
+        { name: '开源贡献', href: '#open-source' }
       ]
     },
     {
       title: '关于',
       links: [
-        { name: '关于我', href: '#about' },
-        { name: '我的技能', href: '#skills' },
-        { name: '我的经历', href: '#experience' },
+        { name: 'GitHub', href: 'https://github.com/username' },
+        { name: '微信', href: 'https://weixin.qq.com' },
+        { name: '邮箱', href: 'mailto:example@example.com' },
         { name: '隐私政策', href: '#privacy' }
       ]
     }

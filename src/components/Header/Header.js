@@ -40,6 +40,7 @@ const Header = () => {
   const navItems = [
     { title: '首页', href: '#home' },
     { title: '我的世界', href: '#my-world' },
+    { title: '我的服务', href: '#services' },
     { 
       title: '我的作品', 
       href: '#projects',
@@ -79,10 +80,7 @@ const Header = () => {
           iconBg: '#e6faff'
         }
       ]
-    },
-    { title: '技能分享', href: '#skills' },
-    { title: '生活记录', href: '#life' },
-    { title: '联系咨询', href: '#contact' }
+    }
   ];
   
   return (

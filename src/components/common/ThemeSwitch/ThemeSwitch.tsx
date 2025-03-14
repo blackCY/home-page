@@ -1,13 +1,22 @@
 import React from 'react';
 import './ThemeSwitch.css';
 import { useTheme } from '../../../contexts/ThemeContext';
+import { ThemeMode } from '../../../types/common';
 
-const ThemeSwitch = () => {
+interface ThemeSwitchProps {
+  className?: string;
+  showLabel?: boolean;
+}
+
+const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ 
+  className = '',
+  showLabel = true
+}) => {
   const { theme, toggleTheme } = useTheme();
   
   return (
     <button 
-      className={`theme-switch ${theme}`} 
+      className={`theme-switch ${theme} ${className}`} 
       onClick={toggleTheme}
       aria-label={`切换到${theme === 'light' ? '暗色' : '亮色'}模式`}
     >
@@ -32,7 +41,7 @@ const ThemeSwitch = () => {
           )}
         </div>
       </div>
-      <span className="switch-label">{theme === 'light' ? '亮色' : '暗色'}</span>
+      {showLabel && <span className="switch-label">{theme === 'light' ? '亮色' : '暗色'}</span>}
     </button>
   );
 };

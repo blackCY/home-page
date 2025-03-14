@@ -1,29 +1,35 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './DropdownMenu.css';
+import { NavItem } from '../../../types/common';
 
-const DropdownMenu = ({ item }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isMenuHovered, setIsMenuHovered] = useState(false);
-  const dropdownRef = useRef(null);
+interface DropdownMenuProps {
+  item: NavItem;
+  className?: string;
+}
+
+const DropdownMenu: React.FC<DropdownMenuProps> = ({ item, className = '' }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [isMenuHovered, setIsMenuHovered] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   
   // 处理菜单按钮的鼠标进入
-  const handleToggleMouseEnter = () => {
+  const handleToggleMouseEnter = (): void => {
     setIsHovered(true);
   };
   
   // 处理菜单按钮的鼠标离开
-  const handleToggleMouseLeave = () => {
+  const handleToggleMouseLeave = (): void => {
     setIsHovered(false);
   };
   
   // 处理下拉菜单的鼠标进入
-  const handleMenuMouseEnter = () => {
+  const handleMenuMouseEnter = (): void => {
     setIsMenuHovered(true);
   };
   
   // 处理下拉菜单的鼠标离开
-  const handleMenuMouseLeave = () => {
+  const handleMenuMouseLeave = (): void => {
     setIsMenuHovered(false);
   };
   
@@ -42,7 +48,7 @@ const DropdownMenu = ({ item }) => {
   
   // 移动设备触摸事件支持
   useEffect(() => {
-    const handleTouchStart = (e) => {
+    const handleTouchStart = (e: Event): void => {
       e.preventDefault();
       setIsOpen(!isOpen);
     };
@@ -51,7 +57,7 @@ const DropdownMenu = ({ item }) => {
     if (currentRef) {
       const toggleButton = currentRef.querySelector('.dropdown-toggle');
       if (toggleButton) {
-        toggleButton.addEventListener('touchstart', handleTouchStart);
+        toggleButton.addEventListener('touchstart', handleTouchStart as EventListener);
       }
     }
     
@@ -59,7 +65,7 @@ const DropdownMenu = ({ item }) => {
       if (currentRef) {
         const toggleButton = currentRef.querySelector('.dropdown-toggle');
         if (toggleButton) {
-          toggleButton.removeEventListener('touchstart', handleTouchStart);
+          toggleButton.removeEventListener('touchstart', handleTouchStart as EventListener);
         }
       }
     };
@@ -67,7 +73,7 @@ const DropdownMenu = ({ item }) => {
   
   return (
     <div 
-      className="dropdown-container" 
+      className={`dropdown-container ${className}`}
       ref={dropdownRef}
     >
       <button 
@@ -92,7 +98,7 @@ const DropdownMenu = ({ item }) => {
             <p className="header-description">探索我的项目作品集</p>
           </div>
           
-          {item.dropdownItems.map((dropdownItem, index) => (
+          {item.dropdownItems?.map((dropdownItem, index) => (
             <a 
               key={index} 
               href={dropdownItem.href} 

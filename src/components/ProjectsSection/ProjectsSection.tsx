@@ -3,12 +3,28 @@ import './ProjectsSection.css';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
 import AnimatedTitle from '../common/AnimatedTitle/AnimatedTitle';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import { Project } from '../../types/common';
 
-const ProjectsSection = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [direction, setDirection] = useState('right'); // 'right' or 'left'
-  const [isAnimating, setIsAnimating] = useState(false);
-  const nodeRef = useRef(null);
+interface Category {
+  id: string;
+  name: string;
+}
+
+interface ProjectsSectionProps {
+  className?: string;
+}
+
+interface ProjectCardProps {
+  project: Project;
+  index: number;
+  categories: Category[];
+}
+
+const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = '' }) => {
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [direction, setDirection] = useState<'right' | 'left'>('right');
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const nodeRef = useRef<HTMLDivElement>(null);
   
   // 使用滚动动画
   const sectionAnimation = useScrollAnimation({
@@ -17,7 +33,7 @@ const ProjectsSection = () => {
   });
   
   // 项目类别
-  const categories = [
+  const categories: Category[] = [
     { id: 'all', name: '全部' },
     { id: 'web', name: '网站设计' },
     { id: 'app', name: '应用程序' },
@@ -26,9 +42,9 @@ const ProjectsSection = () => {
   ];
   
   // 项目数据
-  const projects = [
+  const projects: Project[] = [
     {
-      id: 1,
+      id: '1',
       title: '个人网站设计',
       category: 'web',
       image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
@@ -36,7 +52,7 @@ const ProjectsSection = () => {
       link: '#'
     },
     {
-      id: 2,
+      id: '2',
       title: '电商应用界面',
       category: 'ui',
       image: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
@@ -44,7 +60,7 @@ const ProjectsSection = () => {
       link: '#'
     },
     {
-      id: 3,
+      id: '3',
       title: '旅行应用程序',
       category: 'app',
       image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
@@ -52,7 +68,7 @@ const ProjectsSection = () => {
       link: '#'
     },
     {
-      id: 4,
+      id: '4',
       title: '数据可视化平台',
       category: 'web',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
@@ -60,7 +76,7 @@ const ProjectsSection = () => {
       link: '#'
     },
     {
-      id: 5,
+      id: '5',
       title: '品牌标识设计',
       category: 'other',
       image: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
@@ -68,7 +84,7 @@ const ProjectsSection = () => {
       link: '#'
     },
     {
-      id: 6,
+      id: '6',
       title: '社交媒体应用',
       category: 'app',
       image: 'https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
@@ -83,7 +99,7 @@ const ProjectsSection = () => {
     : projects.filter(project => project.category === activeCategory);
   
   // 处理类别切换
-  const handleCategoryChange = (categoryId) => {
+  const handleCategoryChange = (categoryId: string): void => {
     // 如果已经是当前类别或正在动画中，则不做任何操作
     if (activeCategory === categoryId || isAnimating) return;
     
@@ -97,22 +113,18 @@ const ProjectsSection = () => {
     
     // 设置新的活动类别
     setActiveCategory(categoryId);
-    
-    // 打印调试信息
-    console.log(`切换到类别: ${categoryId}`);
   };
   
   // 动画结束后重置状态
-  const onExited = () => {
+  const onExited = (): void => {
     setIsAnimating(false);
-    console.log('动画完成，可以再次点击按钮');
   };
   
   return (
     <section 
       id="projects" 
-      className="projects-section"
-      ref={sectionAnimation.elementRef}
+      className={`projects-section ${className}`}
+      ref={sectionAnimation.elementRef as React.RefObject<HTMLDivElement>}
     >
       <div className="container">
         <AnimatedTitle 
@@ -163,7 +175,7 @@ const ProjectsSection = () => {
 };
 
 // 提取为单独的组件以避免在回调中使用 Hook
-const ProjectCard = ({ project, index, categories }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, categories }) => {
   // 为每个项目创建单独的动画
   const projectAnimation = useScrollAnimation({
     animation: 'fade-up',
@@ -174,7 +186,7 @@ const ProjectCard = ({ project, index, categories }) => {
   return (
     <div 
       className="project-card"
-      ref={projectAnimation.elementRef}
+      ref={projectAnimation.elementRef as React.RefObject<HTMLDivElement>}
       style={projectAnimation.style}
     >
       <div className="project-image">
@@ -190,7 +202,7 @@ const ProjectCard = ({ project, index, categories }) => {
       </div>
       <div className="project-info">
         <h3 className="project-title">{project.title}</h3>
-        <p className="project-category">{categories.find(c => c.id === project.category).name}</p>
+        <p className="project-category">{categories.find(c => c.id === project.category)?.name}</p>
         <p className="project-description">{project.description}</p>
       </div>
     </div>

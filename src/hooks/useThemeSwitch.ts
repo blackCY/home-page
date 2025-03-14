@@ -1,14 +1,25 @@
 import { useState, useEffect } from 'react';
+import { ThemeMode } from '../types/common';
+
+/**
+ * 主题切换 Hook 的返回类型
+ */
+export interface ThemeState {
+  theme: ThemeMode;
+  toggleTheme: () => void;
+  setTheme: (newTheme: ThemeMode) => void;
+  isDarkMode: boolean;
+}
 
 /**
  * 主题切换 Hook
- * @param {string} defaultTheme - 默认主题 ('light' 或 'dark')
- * @returns {Object} - 包含当前主题和切换主题的函数
+ * @param {ThemeMode} defaultTheme - 默认主题 ('light' 或 'dark')
+ * @returns {ThemeState} - 包含当前主题和切换主题的函数
  */
-const useThemeSwitch = (defaultTheme = 'light') => {
+const useThemeSwitch = (defaultTheme: ThemeMode = 'light'): ThemeState => {
   // 从本地存储中获取保存的主题，如果没有则使用默认主题
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
+  const [theme, setTheme] = useState<ThemeMode>(() => {
+    const savedTheme = localStorage.getItem('theme') as ThemeMode | null;
     return savedTheme || defaultTheme;
   });
   
@@ -27,12 +38,12 @@ const useThemeSwitch = (defaultTheme = 'light') => {
   }, [theme]);
   
   // 切换主题函数
-  const toggleTheme = () => {
+  const toggleTheme = (): void => {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
   
   // 设置特定主题函数
-  const setSpecificTheme = (newTheme) => {
+  const setSpecificTheme = (newTheme: ThemeMode): void => {
     if (newTheme === 'light' || newTheme === 'dark') {
       setTheme(newTheme);
     }

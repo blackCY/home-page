@@ -1,23 +1,44 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, RefObject, CSSProperties } from 'react';
+
+// 视差方向类型
+type ParallaxDirection = 'vertical' | 'horizontal' | 'both';
+
+// 视差选项接口
+interface ParallaxOptions {
+  enabled?: boolean;
+  speed?: number;
+  direction?: ParallaxDirection;
+}
+
+// 偏移量接口
+interface Offset {
+  x: number;
+  y: number;
+}
+
+// 视差钩子返回值接口
+interface ParallaxReturn {
+  elementRef: RefObject<HTMLElement | null>;
+  offset: Offset;
+  isInView: boolean;
+  style: CSSProperties;
+}
 
 /**
  * 视差效果 Hook
- * @param {Object} options - 配置选项
- * @param {boolean} options.enabled - 是否启用视差效果
- * @param {number} options.speed - 视差速度系数
- * @param {string} options.direction - 视差方向 ('vertical', 'horizontal', 'both')
- * @returns {Object} - 包含视差效果相关状态和引用
+ * @param {ParallaxOptions} options - 配置选项
+ * @returns {ParallaxReturn} - 包含视差效果相关状态和引用
  */
-const useParallax = (options = {}) => {
+const useParallax = (options: ParallaxOptions = {}): ParallaxReturn => {
   const {
     enabled = true,
     speed = 0.1,
     direction = 'vertical'
   } = options;
   
-  const elementRef = useRef(null);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [isInView, setIsInView] = useState(false);
+  const elementRef = useRef<HTMLElement>(null);
+  const [offset, setOffset] = useState<Offset>({ x: 0, y: 0 });
+  const [isInView, setIsInView] = useState<boolean>(false);
   
   useEffect(() => {
     if (!enabled || !elementRef.current) return;
@@ -35,13 +56,11 @@ const useParallax = (options = {}) => {
     observer.observe(elementRef.current);
     
     // 处理滚动事件
-    const handleScroll = () => {
-      if (!isInView) return;
+    const handleScroll = (): void => {
+      if (!isInView || !elementRef.current) return;
       
       const element = elementRef.current;
       const rect = element.getBoundingClientRect();
-      const scrollY = window.scrollY;
-      const scrollX = window.scrollX;
       
       // 计算元素中心点相对于视口中心的位置
       const centerY = rect.top + rect.height / 2 - window.innerHeight / 2;

@@ -1,10 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, CSSProperties } from 'react';
 import './AnimatedTitle.css';
 
-const AnimatedTitle = ({ title, subtitle, className = '' }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const titleRef = useRef(null);
+interface MousePosition {
+  x: number;
+  y: number;
+}
+
+interface AnimatedTitleProps {
+  title: string;
+  subtitle?: string;
+  className?: string;
+}
+
+const AnimatedTitle: React.FC<AnimatedTitleProps> = ({ 
+  title, 
+  subtitle, 
+  className = '' 
+}) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
+  const titleRef = useRef<HTMLDivElement>(null);
 
   // 处理滚动显示效果
   useEffect(() => {
@@ -33,7 +48,7 @@ const AnimatedTitle = ({ title, subtitle, className = '' }) => {
   }, []);
 
   // 处理鼠标移动效果
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>): void => {
     if (!titleRef.current) return;
     
     const rect = titleRef.current.getBoundingClientRect();
@@ -54,7 +69,7 @@ const AnimatedTitle = ({ title, subtitle, className = '' }) => {
         style={{
           '--x': `${mousePosition.x}px`,
           '--y': `${mousePosition.y}px`
-        }}
+        } as CSSProperties}
       ></div>
       <h2 className="animated-title">{title}</h2>
       {subtitle && <p className="animated-subtitle">{subtitle}</p>}

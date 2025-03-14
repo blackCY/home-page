@@ -2,8 +2,18 @@ import React from 'react';
 import './Services.css';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
 import AnimatedTitle from '../common/AnimatedTitle/AnimatedTitle';
+import { ServiceData } from '../../types/common';
 
-const Services = () => {
+interface ServicesProps {
+  className?: string;
+}
+
+interface ServiceCardProps {
+  service: ServiceData;
+  index: number;
+}
+
+const Services: React.FC<ServicesProps> = ({ className = '' }) => {
   // 使用滚动动画
   const sectionAnimation = useScrollAnimation({
     animation: 'fade-in',
@@ -11,7 +21,7 @@ const Services = () => {
   });
   
   // 服务数据
-  const servicesData = [
+  const servicesData: ServiceData[] = [
     {
       id: 1,
       icon: (
@@ -95,7 +105,7 @@ const Services = () => {
   return (
     <section 
       id="services" 
-      className="services-section"
+      className={`services-section ${className}`}
       ref={sectionAnimation.elementRef}
     >
       <div className="container">
@@ -106,15 +116,13 @@ const Services = () => {
         />
         
         <div className="services-grid">
-          {servicesData.map((service, index) => {
-            return (
-              <ServiceCard 
-                key={service.id}
-                service={service}
-                index={index}
-              />
-            );
-          })}
+          {servicesData.map((service, index) => (
+            <ServiceCard 
+              key={service.id}
+              service={service}
+              index={index}
+            />
+          ))}
         </div>
       </div>
     </section>
@@ -122,7 +130,7 @@ const Services = () => {
 };
 
 // 提取为单独的组件以避免在回调中使用 Hook
-const ServiceCard = ({ service, index }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
   // 为每个服务创建滚动动画
   const serviceAnimation = useScrollAnimation({
     animation: 'fade-up',
@@ -133,35 +141,35 @@ const ServiceCard = ({ service, index }) => {
   return (
     <div 
       className="service-card"
-      ref={serviceAnimation.elementRef}
+      ref={serviceAnimation.elementRef as React.RefObject<HTMLDivElement>}
       style={serviceAnimation.style}
     >
-                <div className="service-icon">
-                  {service.icon}
-                </div>
-                
-                <h3 className="service-title">{service.title}</h3>
-                <p className="service-description">{service.description}</p>
-                
-                <ul className="service-features">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="feature-item">
-                      <svg className="feature-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <a href="#contact" className="service-cta">
-                  <span>了解更多</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </a>
-              </div>
+      <div className="service-icon">
+        {service.icon}
+      </div>
+      
+      <h3 className="service-title">{service.title}</h3>
+      <p className="service-description">{service.description}</p>
+      
+      <ul className="service-features">
+        {service.features.map((feature, featureIndex) => (
+          <li key={featureIndex} className="feature-item">
+            <svg className="feature-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+      
+      <a href="#contact" className="service-cta">
+        <span>了解更多</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
   );
 };
 

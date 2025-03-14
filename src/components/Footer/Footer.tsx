@@ -2,11 +2,26 @@ import React from 'react';
 import './Footer.css';
 import { FaGithub, FaWeixin, FaEnvelope } from 'react-icons/fa';
 
-const Footer = () => {
+interface QuickLink {
+  name: string;
+  href: string;
+}
+
+interface SocialLink {
+  icon: React.ReactNode;
+  href: string;
+  label: string;
+}
+
+interface FooterProps {
+  className?: string;
+}
+
+const Footer: React.FC<FooterProps> = ({ className = '' }) => {
   const currentYear = new Date().getFullYear();
   
   // 快速链接
-  const quickLinks = [
+  const quickLinks: QuickLink[] = [
     { name: '首页', href: '#home' },
     { name: '我的世界', href: '#my-world' },
     { name: '我的服务', href: '#services' },
@@ -14,14 +29,14 @@ const Footer = () => {
   ];
   
   // 社交链接
-  const socialLinks = [
+  const socialLinks: SocialLink[] = [
     { icon: <FaGithub />, href: 'https://github.com/username', label: 'GitHub' },
     { icon: <FaWeixin />, href: 'https://weixin.qq.com', label: '微信' },
     { icon: <FaEnvelope />, href: 'mailto:example@example.com', label: '邮箱' }
   ];
   
   return (
-    <footer className="site-footer">
+    <footer className={`site-footer ${className}`}>
       <div className="container footer-container">
         <div className="footer-content">
           <div className="footer-branding">

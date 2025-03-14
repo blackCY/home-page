@@ -3,14 +3,19 @@ import './ParallaxSection.css';
 import { useParallax } from '../../contexts/ParallaxContext';
 import Card from '../common/Card/Card';
 import AnimatedTitle from '../common/AnimatedTitle/AnimatedTitle';
+import { CardData } from '../../types/common';
 
-const ParallaxSection = () => {
+interface ParallaxSectionProps {
+  className?: string;
+}
+
+const ParallaxSection: React.FC<ParallaxSectionProps> = ({ className = '' }) => {
   const { enabled, toggleParallax } = useParallax();
-  const sectionRef = useRef(null);
-  const cardsRef = useRef(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const cardsRef = useRef<HTMLDivElement | null>(null);
   
   // 卡片数据
-  const cards = [
+  const cards: CardData[] = [
     {
       id: 1,
       title: '我的项目',
@@ -59,26 +64,26 @@ const ParallaxSection = () => {
   useEffect(() => {
     if (!enabled || !sectionRef.current || !cardsRef.current) return;
     
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       const scrollPosition = window.scrollY;
-      const sectionTop = sectionRef.current.offsetTop;
-      const sectionHeight = sectionRef.current.offsetHeight;
+      const sectionTop = sectionRef.current?.offsetTop || 0;
+      const sectionHeight = sectionRef.current?.offsetHeight || 0;
       
       // 计算相对滚动位置
       const relativeScroll = scrollPosition - sectionTop + window.innerHeight;
       
       // 仅在视口内应用视差效果
       if (relativeScroll > 0 && scrollPosition < sectionTop + sectionHeight) {
-        const cardElements = cardsRef.current.querySelectorAll('.parallax-card');
+        const cardElements = cardsRef.current?.querySelectorAll('.parallax-card');
         
-        cardElements.forEach((card, index) => {
+        cardElements?.forEach((card, index) => {
           const speed = 0.05;
           const delay = index * 0.2;
           const yOffset = relativeScroll * speed * (1 + delay);
           const scale = 1 + (relativeScroll * 0.0001 * (1 + delay));
           const rotation = (index % 2 === 0 ? 1 : -1) * relativeScroll * 0.01 * speed;
           
-          card.style.transform = `translateY(${yOffset}px) scale(${scale}) rotate(${rotation}deg)`;
+          (card as HTMLElement).style.transform = `translateY(${yOffset}px) scale(${scale}) rotate(${rotation}deg)`;
         });
       }
     };
@@ -91,7 +96,7 @@ const ParallaxSection = () => {
   }, [enabled]);
   
   return (
-    <section id="my-world" className="parallax-section" ref={sectionRef}>
+    <section id="my-world" className={`parallax-section ${className}`} ref={sectionRef}>
       <div className="container parallax-container">
         <AnimatedTitle 
           title="我的世界" 

@@ -1,24 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, CSSProperties } from 'react';
+
+// 头部滚动选项接口
+interface HeaderScrollOptions {
+  threshold?: number;
+  hideOnScroll?: boolean;
+}
+
+// 头部滚动钩子返回值接口
+interface HeaderScrollReturn {
+  isScrolled: boolean;
+  isVisible: boolean;
+  scrollY: number;
+  style: CSSProperties;
+}
 
 /**
  * 头部滚动效果 Hook
- * @param {Object} options - 配置选项
- * @param {number} options.threshold - 滚动阈值，超过该值时应用效果
- * @param {boolean} options.hideOnScroll - 是否在向下滚动时隐藏头部
- * @returns {Object} - 包含头部滚动状态
+ * @param {HeaderScrollOptions} options - 配置选项
+ * @returns {HeaderScrollReturn} - 包含头部滚动状态
  */
-const useHeaderScroll = (options = {}) => {
+const useHeaderScroll = (options: HeaderScrollOptions = {}): HeaderScrollReturn => {
   const {
     threshold = 50,
     hideOnScroll = false
   } = options;
   
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [lastScrollY, setLastScrollY] = useState<number>(0);
   
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       const currentScrollY = window.scrollY;
       
       // 判断是否超过阈值

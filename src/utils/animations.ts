@@ -9,7 +9,7 @@
  * @param {number} t - 插值因子 (0-1)
  * @returns {number} - 插值结果
  */
-export const lerp = (start, end, t) => {
+export const lerp = (start: number, end: number, t: number): number => {
   return start * (1 - t) + end * t;
 };
 
@@ -20,7 +20,7 @@ export const lerp = (start, end, t) => {
  * @param {number} max - 最大值
  * @returns {number} - 限制后的值
  */
-export const clamp = (value, min, max) => {
+export const clamp = (value: number, min: number, max: number): number => {
   return Math.min(Math.max(value, min), max);
 };
 
@@ -33,40 +33,64 @@ export const clamp = (value, min, max) => {
  * @param {number} outMax - 输出范围最大值
  * @returns {number} - 映射后的值
  */
-export const mapRange = (value, inMin, inMax, outMin, outMax) => {
+export const mapRange = (
+  value: number,
+  inMin: number,
+  inMax: number,
+  outMin: number,
+  outMax: number
+): number => {
   return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 };
+
+// 缓动函数类型
+type EasingFunction = (t: number) => number;
 
 /**
  * 缓动函数集合
  */
-export const easing = {
+export const easing: Record<string, EasingFunction> = {
   // 线性
-  linear: t => t,
+  linear: (t: number): number => t,
   
   // 缓入
-  easeInQuad: t => t * t,
-  easeInCubic: t => t * t * t,
-  easeInQuart: t => t * t * t * t,
+  easeInQuad: (t: number): number => t * t,
+  easeInCubic: (t: number): number => t * t * t,
+  easeInQuart: (t: number): number => t * t * t * t,
   
   // 缓出
-  easeOutQuad: t => 1 - (1 - t) * (1 - t),
-  easeOutCubic: t => 1 - Math.pow(1 - t, 3),
-  easeOutQuart: t => 1 - Math.pow(1 - t, 4),
+  easeOutQuad: (t: number): number => 1 - (1 - t) * (1 - t),
+  easeOutCubic: (t: number): number => 1 - Math.pow(1 - t, 3),
+  easeOutQuart: (t: number): number => 1 - Math.pow(1 - t, 4),
   
   // 缓入缓出
-  easeInOutQuad: t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2,
-  easeInOutCubic: t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
-  easeInOutQuart: t => t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2
+  easeInOutQuad: (t: number): number => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2,
+  easeInOutCubic: (t: number): number => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+  easeInOutQuart: (t: number): number => t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2
 };
+
+// 视差方向类型
+type ParallaxDirection = 'vertical' | 'horizontal' | 'both';
+
+// 视差选项接口
+interface ParallaxOptions {
+  speed?: number;
+  direction?: ParallaxDirection;
+  reverse?: boolean;
+  easeFunc?: EasingFunction;
+}
 
 /**
  * 应用视差效果
  * @param {HTMLElement} element - 目标元素
  * @param {number} scrollPosition - 当前滚动位置
- * @param {Object} options - 配置选项
+ * @param {ParallaxOptions} options - 配置选项
  */
-export const applyParallax = (element, scrollPosition, options = {}) => {
+export const applyParallax = (
+  element: HTMLElement | null,
+  scrollPosition: number,
+  options: ParallaxOptions = {}
+): void => {
   const {
     speed = 0.1,
     direction = 'vertical',
@@ -98,14 +122,26 @@ export const applyParallax = (element, scrollPosition, options = {}) => {
   }
 };
 
+// 滚动动画选项接口
+interface ScrollAnimationOptions {
+  threshold?: number;
+  delay?: number;
+  once?: boolean;
+  stagger?: number;
+}
+
 /**
  * 创建滚动触发动画
  * @param {HTMLElement} element - 目标元素
  * @param {string} animationClass - 动画类名
- * @param {Object} options - 配置选项
+ * @param {ScrollAnimationOptions} options - 配置选项
  * @returns {Function} - 清理函数
  */
-export const createScrollAnimation = (element, animationClass, options = {}) => {
+export const createScrollAnimation = (
+  element: HTMLElement | null,
+  animationClass: string,
+  options: ScrollAnimationOptions = {}
+): () => void => {
   const {
     threshold = 0.1,
     delay = 0,
@@ -144,20 +180,24 @@ export const createScrollAnimation = (element, animationClass, options = {}) => 
  * 批量应用滚动动画
  * @param {string} selector - 元素选择器
  * @param {string} animationClass - 动画类名
- * @param {Object} options - 配置选项
+ * @param {ScrollAnimationOptions} options - 配置选项
  */
-export const applyScrollAnimations = (selector, animationClass, options = {}) => {
+export const applyScrollAnimations = (
+  selector: string,
+  animationClass: string,
+  options: ScrollAnimationOptions = {}
+): () => void => {
   const elements = document.querySelectorAll(selector);
-  const cleanupFunctions = [];
+  const cleanupFunctions: Array<() => void> = [];
   
   elements.forEach((element, index) => {
     // 为每个元素应用不同的延迟
     const elementOptions = {
       ...options,
-      delay: options.delay + (options.stagger || 0) * index
+      delay: options.delay || 0 + (options.stagger || 0) * index
     };
     
-    const cleanup = createScrollAnimation(element, animationClass, elementOptions);
+    const cleanup = createScrollAnimation(element as HTMLElement, animationClass, elementOptions);
     cleanupFunctions.push(cleanup);
   });
   

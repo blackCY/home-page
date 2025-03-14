@@ -1,15 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { ScrollAnimationOptions, ScrollAnimationResult } from '../types/common';
+
+// 滚动动画钩子返回值接口
+interface ScrollAnimationReturn extends ScrollAnimationResult {
+  animationClass: string;
+}
+
 /**
  * 滚动动画 Hook
- * @param {Object} options - 配置选项
- * @param {string} options.animation - 动画类名
- * @param {number} options.threshold - 触发阈值 (0-1)
- * @param {number} options.delay - 延迟时间 (ms)
- * @param {boolean} options.once - 是否只触发一次
- * @returns {Object} - 包含元素引用和动画状态
+ * @param {ScrollAnimationOptions} options - 配置选项
+ * @returns {ScrollAnimationReturn} - 包含元素引用和动画状态
  */
-const useScrollAnimation = (options = {}) => {
+const useScrollAnimation = (options: ScrollAnimationOptions): ScrollAnimationReturn => {
   const {
     animation = 'fade-in',
     threshold = 0.1,
@@ -17,9 +20,9 @@ const useScrollAnimation = (options = {}) => {
     once = true
   } = options;
   
-  const elementRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const elementRef = useRef<HTMLElement | null>(null);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [hasAnimated, setHasAnimated] = useState<boolean>(false);
   
   useEffect(() => {
     const element = elementRef.current;
@@ -61,8 +64,9 @@ const useScrollAnimation = (options = {}) => {
   // 生成动画类名
   const animationClass = isVisible ? animation : '';
   
+  // 使用类型断言确保返回类型正确
   return {
-    elementRef,
+    elementRef: elementRef as React.RefObject<HTMLElement>,
     isVisible,
     animationClass,
     style: {

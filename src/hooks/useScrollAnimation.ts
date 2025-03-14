@@ -71,7 +71,9 @@ const useScrollAnimation = (options: ScrollAnimationOptions): ScrollAnimationRet
     animationClass,
     style: {
       opacity: isVisible ? 1 : 0,
-      transition: `opacity ${delay}ms ease-in-out`
+      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+      // 只设置 opacity 和 transform 的 transition，不影响其他属性
+      transition: `opacity ${delay}ms ease-in-out, transform ${delay}ms ease-in-out`
     }
   };
 };

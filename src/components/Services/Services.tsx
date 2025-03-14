@@ -140,7 +140,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => {
   
   return (
     <div 
-      className="service-card"
+      className={`service-card ${serviceAnimation.isVisible ? serviceAnimation.animationClass : ''}`}
       ref={serviceAnimation.elementRef as React.RefObject<HTMLDivElement>}
       style={serviceAnimation.style}
     >

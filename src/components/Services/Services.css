@@ -83,10 +83,10 @@
 }
 
 .service-card:hover {
-  transform: translateY(-15px) rotateX(2deg);
+  transform: translateY(-15px) rotateX(2deg) !important; /* 使用 !important 确保覆盖内联样式 */
   box-shadow: 0 25px 50px rgba(99, 102, 241, 0.2);
-  transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1),
-              box-shadow 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+              box-shadow 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .service-card:hover::before {

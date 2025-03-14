@@ -185,7 +185,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, categories })
   
   return (
     <div 
-      className="project-card"
+      className={`project-card ${projectAnimation.isVisible ? projectAnimation.animationClass : ''}`}
       ref={projectAnimation.elementRef as React.RefObject<HTMLDivElement>}
       style={projectAnimation.style}
     >

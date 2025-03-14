@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './ProjectsSection.css';
 import useScrollAnimation from '../../hooks/useScrollAnimation';
 import AnimatedTitle from '../common/AnimatedTitle/AnimatedTitle';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [direction, setDirection] = useState('right'); // 'right' or 'left'
+  const [isAnimating, setIsAnimating] = useState(false);
+  const nodeRef = useRef(null);
   
   // 使用滚动动画
   const sectionAnimation = useScrollAnimation({
@@ -80,7 +84,28 @@ const ProjectsSection = () => {
   
   // 处理类别切换
   const handleCategoryChange = (categoryId) => {
+    // 如果已经是当前类别或正在动画中，则不做任何操作
+    if (activeCategory === categoryId || isAnimating) return;
+    
+    // 设置轮播方向
+    const currentIndex = categories.findIndex(c => c.id === activeCategory);
+    const newIndex = categories.findIndex(c => c.id === categoryId);
+    setDirection(newIndex > currentIndex ? 'right' : 'left');
+    
+    // 开始动画
+    setIsAnimating(true);
+    
+    // 设置新的活动类别
     setActiveCategory(categoryId);
+    
+    // 打印调试信息
+    console.log(`切换到类别: ${categoryId}`);
+  };
+  
+  // 动画结束后重置状态
+  const onExited = () => {
+    setIsAnimating(false);
+    console.log('动画完成，可以再次点击按钮');
   };
   
   return (
@@ -102,22 +127,36 @@ const ProjectsSection = () => {
               key={category.id}
               className={`filter-btn ${activeCategory === category.id ? 'active' : ''}`}
               onClick={() => handleCategoryChange(category.id)}
+              disabled={isAnimating}
             >
               {category.name}
             </button>
           ))}
         </div>
         
-        <div className="projects-grid">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard 
-              key={project.id}
-              project={project}
-              index={index}
-              categories={categories}
-            />
-          ))}
-        </div>
+        <SwitchTransition mode="out-in">
+          <CSSTransition
+            key={activeCategory}
+            nodeRef={nodeRef}
+            timeout={500}
+            classNames={`slide-${direction}`}
+            onExited={onExited}
+            unmountOnExit
+          >
+            <div className="projects-content" ref={nodeRef}>
+              <div className="projects-grid">
+                {filteredProjects.map((project, index) => (
+                  <ProjectCard 
+                    key={project.id}
+                    project={project}
+                    index={index}
+                    categories={categories}
+                  />
+                ))}
+              </div>
+            </div>
+          </CSSTransition>
+        </SwitchTransition>
       </div>
     </section>
   );

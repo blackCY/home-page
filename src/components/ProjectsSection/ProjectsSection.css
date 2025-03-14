@@ -25,6 +25,8 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 3rem;
+  position: relative;
+  z-index: 10; /* 确保按钮在最上层 */
 }
 
 .filter-btn {
@@ -37,12 +39,45 @@
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   transition: all var(--transition-normal) var(--ease-custom);
+  position: relative;
+  overflow: hidden;
 }
 
 .filter-btn:hover {
   border-color: var(--color-indigo-400);
   color: var(--color-indigo-600);
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(99, 102, 241, 0.15);
+}
+
+.filter-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background-color: rgba(99, 102, 241, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+  z-index: -1;
+}
+
+.filter-btn:hover::after {
+  width: 150%;
+  height: 150%;
+}
+
+.filter-btn:active {
+  transform: translateY(0);
+}
+
+.filter-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .filter-btn.active {
@@ -52,12 +87,66 @@
   box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
 }
 
+/* 项目内容区域 */
+.projects-content {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+  min-height: 400px;
+  z-index: 1; /* 确保内容在按钮下方 */
+}
+
 /* 项目网格 */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2.5rem;
   margin-bottom: 3rem;
+}
+
+/* 轮播动画效果 */
+.slide-right-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.slide-right-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms ease;
+}
+
+.slide-right-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-right-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 500ms ease;
+}
+
+.slide-left-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.slide-left-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms ease;
+}
+
+.slide-left-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-left-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 500ms ease;
 }
 
 /* 项目卡片 */
@@ -83,15 +172,15 @@
 }
 
 /* 不规则形状卡片 */
-.project-card:nth-child(3n+1) {
+.projects-grid .project-card:nth-child(3n+1) {
   border-radius: 30px 10px 40px 15px;
 }
 
-.project-card:nth-child(3n+2) {
+.projects-grid .project-card:nth-child(3n+2) {
   border-radius: 15px 35px 10px 25px;
 }
 
-.project-card:nth-child(3n+3) {
+.projects-grid .project-card:nth-child(3n+3) {
   border-radius: 20px 20px 40px 10px;
 }
 
@@ -214,6 +303,14 @@
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
   }
+  
+  .project-image {
+    height: 180px;
+  }
+  
+  .projects-content {
+    min-height: 350px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -226,5 +323,14 @@
   
   .filter-btn {
     white-space: nowrap;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .projects-content {
+    min-height: 300px;
   }
 }

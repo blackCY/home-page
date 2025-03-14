@@ -27,7 +27,7 @@ const ProjectsSection = () => {
       id: 1,
       title: '个人网站设计',
       category: 'web',
-      image: 'https://via.placeholder.com/600x400',
+      image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
       description: '使用 React 和现代 CSS 技术构建的响应式个人网站',
       link: '#'
     },
@@ -35,7 +35,7 @@ const ProjectsSection = () => {
       id: 2,
       title: '电商应用界面',
       category: 'ui',
-      image: 'https://via.placeholder.com/600x400',
+      image: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
       description: '为电子商务平台设计的现代化用户界面',
       link: '#'
     },
@@ -43,7 +43,7 @@ const ProjectsSection = () => {
       id: 3,
       title: '旅行应用程序',
       category: 'app',
-      image: 'https://via.placeholder.com/600x400',
+      image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
       description: '帮助用户规划旅行的移动应用程序',
       link: '#'
     },
@@ -51,7 +51,7 @@ const ProjectsSection = () => {
       id: 4,
       title: '数据可视化平台',
       category: 'web',
-      image: 'https://via.placeholder.com/600x400',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
       description: '使用 D3.js 构建的交互式数据可视化平台',
       link: '#'
     },
@@ -59,7 +59,7 @@ const ProjectsSection = () => {
       id: 5,
       title: '品牌标识设计',
       category: 'other',
-      image: 'https://via.placeholder.com/600x400',
+      image: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
       description: '为科技初创公司设计的品牌标识和视觉系统',
       link: '#'
     },
@@ -67,7 +67,7 @@ const ProjectsSection = () => {
       id: 6,
       title: '社交媒体应用',
       category: 'app',
-      image: 'https://via.placeholder.com/600x400',
+      image: 'https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
       description: '基于位置的社交媒体应用程序',
       link: '#'
     }

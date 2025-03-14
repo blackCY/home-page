@@ -47,9 +47,6 @@ const Hero = () => {
             <a href="#my-world" className="hero-button primary hero-parallax" data-speed="0.3">
               探索我的世界
             </a>
-            <a href="#contact" className="hero-button secondary hero-parallax" data-speed="0.3">
-              与我联系
-            </a>
           </div>
         </div>
         <div className="hero-image-container">

@@ -1,92 +1,66 @@
 import React from 'react';
 import './Footer.css';
-import SocialIcons from '../common/SocialIcons/SocialIcons';
+import { FaGithub, FaWeixin, FaEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   
-  // 页脚链接
-  const footerLinks = [
-    {
-      title: '导航',
-      links: [
-        { name: '首页', href: '#home' },
-        { name: '我的世界', href: '#my-world' },
-        { name: '我的服务', href: '#services' },
-        { name: '我的作品', href: '#projects' }
-      ]
-    },
-    {
-      title: '资源',
-      links: [
-        { name: 'Web 项目', href: '#web-projects' },
-        { name: '移动应用', href: '#mobile-apps' },
-        { name: 'AI 研究', href: '#ai-research' },
-        { name: '开源贡献', href: '#open-source' }
-      ]
-    },
-    {
-      title: '关于',
-      links: [
-        { name: 'GitHub', href: 'https://github.com/username' },
-        { name: '微信', href: 'https://weixin.qq.com' },
-        { name: '邮箱', href: 'mailto:example@example.com' },
-        { name: '隐私政策', href: '#privacy' }
-      ]
-    }
+  // 快速链接
+  const quickLinks = [
+    { name: '首页', href: '#home' },
+    { name: '我的世界', href: '#my-world' },
+    { name: '我的服务', href: '#services' },
+    { name: '我的作品', href: '#projects' }
+  ];
+  
+  // 社交链接
+  const socialLinks = [
+    { icon: <FaGithub />, href: 'https://github.com/username', label: 'GitHub' },
+    { icon: <FaWeixin />, href: 'https://weixin.qq.com', label: '微信' },
+    { icon: <FaEnvelope />, href: 'mailto:example@example.com', label: '邮箱' }
   ];
   
   return (
     <footer className="site-footer">
       <div className="container footer-container">
-        <div className="footer-top">
-          <div className="footer-logo">
+        <div className="footer-content">
+          <div className="footer-branding">
             <a href="#home" className="logo">
               <span className="logo-text">我的空间</span>
             </a>
             <p className="footer-tagline">探索、创造、分享</p>
           </div>
           
-          <div className="footer-links">
-            {footerLinks.map((group, index) => (
-              <div key={index} className="footer-link-group">
-                <h3 className="footer-link-title">{group.title}</h3>
-                <ul className="footer-link-list">
-                  {group.links.map((link, idx) => (
-                    <li key={idx} className="footer-link-item">
-                      <a href={link.href} className="footer-link">{link.name}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          <div className="footer-nav">
+            <h3 className="footer-heading">快速导航</h3>
+            <div className="footer-links-horizontal">
+              {quickLinks.map((link, index) => (
+                <a key={index} href={link.href} className="footer-link">{link.name}</a>
+              ))}
+            </div>
           </div>
           
-          <div className="footer-newsletter">
-            <h3 className="footer-newsletter-title">订阅我的通讯</h3>
-            <p className="footer-newsletter-text">获取最新的文章、项目和资源更新</p>
-            <form className="footer-newsletter-form">
-              <input 
-                type="email" 
-                placeholder="您的邮箱地址" 
-                className="footer-newsletter-input" 
-                required 
-              />
-              <button type="submit" className="footer-newsletter-button">
-                订阅
-              </button>
-            </form>
+          <div className="footer-social-container">
+            <h3 className="footer-heading">联系我</h3>
+            <div className="footer-social-links">
+              {socialLinks.map((link, index) => (
+                <a 
+                  key={index} 
+                  href={link.href} 
+                  className="footer-social-link" 
+                  aria-label={link.label}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  {link.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
         
         <div className="footer-bottom">
-          <div className="footer-copyright">
-            <p>&copy; {currentYear} 我的个人空间. 保留所有权利.</p>
-          </div>
-          
-          <div className="footer-social">
-            <SocialIcons />
-          </div>
+          <p className="footer-copyright">&copy; {currentYear} 我的个人空间</p>
         </div>
       </div>
     </footer>

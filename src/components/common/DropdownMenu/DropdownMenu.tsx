@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './DropdownMenu.css';
 import { NavItem } from '../../../types/common';
 
@@ -12,6 +13,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ item, className = '' }) => 
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [isMenuHovered, setIsMenuHovered] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
   
   // 处理菜单按钮的鼠标进入
   const handleToggleMouseEnter = (): void => {
@@ -99,10 +101,10 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ item, className = '' }) => 
           </div>
           
           {item.dropdownItems?.map((dropdownItem, index) => (
-            <a 
+            <Link 
               key={index} 
-              href={dropdownItem.href} 
-              className="dropdown-item"
+              to={dropdownItem.href} 
+              className={`dropdown-item ${location.pathname === dropdownItem.href.split('?')[0] ? 'active' : ''}`}
               onClick={() => setIsOpen(false)}
             >
               <div className="dropdown-item-image item-icon" style={{backgroundColor: dropdownItem.iconBg || '#f0f4ff'}}>
@@ -125,7 +127,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ item, className = '' }) => 
               <div className="arrow-icon">
                 <i className="fas fa-chevron-right"></i>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       )}

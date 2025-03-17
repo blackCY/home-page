@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
-import Hero from './components/Hero/Hero';
-import ParallaxSection from './components/ParallaxSection/ParallaxSection';
-import Services from './components/Services/Services';
-import ProjectsSection from './components/ProjectsSection/ProjectsSection';
 import Footer from './components/Footer/Footer';
 import BackToTop from './components/common/BackToTop/BackToTop';
 import { ParallaxProvider } from './contexts/ParallaxContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ParallaxContextType } from './types/common';
+
+// 页面组件
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
+import ContactPage from './pages/ContactPage';
 
 interface AppProps {
   className?: string;
@@ -29,16 +33,21 @@ const App: React.FC<AppProps> = ({ className = '' }) => {
     toggleParallax
   };
 
+
+
   return (
     <ThemeProvider>
       <ParallaxProvider value={parallaxContextValue}>
         <div className={`app-container ${className}`}>
           <Header />
           <main>
-            <Hero />
-            <ParallaxSection />
-            <Services />
-            <ProjectsSection />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/projects/:projectId" element={<ProjectDetailPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
           </main>
           <Footer />
           <BackToTop />

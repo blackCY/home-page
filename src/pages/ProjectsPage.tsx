@@ -10,7 +10,7 @@ const projectsData = [
     title: '个人作品集网站',
     category: 'Web 开发',
     description: '一个展示我个人作品和技能的响应式网站。使用 React、TypeScript 和 Framer Motion 构建，具有现代设计和流畅的动画效果。',
-    imageUrl: 'https://via.placeholder.com/600x400',
+    imageUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1000&auto=format&fit=crop',
     technologies: ['React', 'TypeScript', 'CSS3', 'Framer Motion']
   },
   {
@@ -18,7 +18,7 @@ const projectsData = [
     title: '电子商务平台',
     category: '全栈开发',
     description: '为零售客户开发的现代电子商务平台，具有产品目录、购物车、支付集成和用户账户管理功能。',
-    imageUrl: 'https://via.placeholder.com/600x400',
+    imageUrl: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1000&auto=format&fit=crop',
     technologies: ['React', 'Node.js', 'Express', 'MongoDB']
   },
   {
@@ -26,7 +26,7 @@ const projectsData = [
     title: '健康追踪应用',
     category: '移动应用开发',
     description: '一款帮助用户追踪健康目标、记录运动和监控营养摄入的移动应用。包括数据可视化和进度报告功能。',
-    imageUrl: 'https://via.placeholder.com/600x400',
+    imageUrl: 'https://images.unsplash.com/photo-1576678927484-cc907957088c?q=80&w=1000&auto=format&fit=crop',
     technologies: ['React Native', 'TypeScript', 'Redux', 'Firebase']
   },
   {
@@ -34,7 +34,7 @@ const projectsData = [
     title: '任务管理系统',
     category: 'Web 应用',
     description: '一个功能齐全的任务管理系统，帮助团队组织和跟踪项目进度。包括拖放界面、任务分配和截止日期提醒功能。',
-    imageUrl: 'https://via.placeholder.com/600x400',
+    imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop',
     technologies: ['Vue.js', 'Vuex', 'Node.js', 'PostgreSQL']
   },
   {
@@ -42,7 +42,7 @@ const projectsData = [
     title: '社交媒体仪表板',
     category: 'Web 开发',
     description: '一个综合性社交媒体管理仪表板，允许用户从单一界面管理多个社交媒体账户，包括内容发布和分析功能。',
-    imageUrl: 'https://via.placeholder.com/600x400',
+    imageUrl: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=1000&auto=format&fit=crop',
     technologies: ['React', 'Redux', 'Express', 'Social Media APIs']
   },
   {
@@ -50,7 +50,7 @@ const projectsData = [
     title: '天气预报应用',
     category: '移动应用开发',
     description: '一款提供实时天气更新和预报的移动应用，具有位置跟踪、天气警报和交互式地图功能。',
-    imageUrl: 'https://via.placeholder.com/600x400',
+    imageUrl: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=1000&auto=format&fit=crop',
     technologies: ['Flutter', 'Dart', 'Weather API', 'Google Maps API']
   }
 ];

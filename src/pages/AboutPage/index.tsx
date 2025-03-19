@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import '../styles/pages/AboutPage.css';
+import './style.css';
 
 const AboutPage: React.FC = () => {
   const pageVariants = {

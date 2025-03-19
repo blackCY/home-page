@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import '../styles/pages/ProjectsPage.css';
+import './style.css';
 
 // 模拟项目数据
 const projectsData = [
